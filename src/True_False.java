@@ -1,4 +1,4 @@
-public class True_Flase {
+public class True_False {
 
 
 
@@ -10,7 +10,7 @@ public void getBank(){
 }
 
 public void sendBank(){
-    //will need to be changed to return a value later (the bank)
+
 
 }
 
