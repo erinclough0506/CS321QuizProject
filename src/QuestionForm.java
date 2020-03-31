@@ -1,48 +1,23 @@
 import javax.swing.*;
 
 public class QuestionForm {
+    //text fields for MC
     String a = " ";
     String b = " ";
     String c = " ";
     String d = " ";
     String prompt = " ";
     String answer = " ";
+    // answer flags for MC
     boolean aTrue = false;
     boolean bTrue = false;
     boolean cTrue = false;
     boolean dTrue = false;
-
-    public void AnswerKey(String prompt, String answer)
-    {
-        this.prompt = prompt;
-        if (answer.equals("a"))
-        {
-            aTrue = true;
-        }
-        else if (answer.equals("b"))
-        {
-            bTrue = true;
-        }
-         else if (answer.equals("c"))
-        {
-            cTrue = true;
-        }
-         else if (answer.equals("d"))
-        {
-            dTrue = true;
-        }
-         else
-        {
-            cTrue = true;
-        }
-    }
-
-
-
-
-
-
-
+    boolean noAnswer = false;
+    //answer flags & text field for TF
+    String TFprompt = " ";
+    boolean isTrue = false;
+    boolean isFalse = false;
 
     public void createQuestion(){
         JFrame frame = new JFrame();
@@ -63,6 +38,7 @@ public class QuestionForm {
         JButton newQuestion = new JButton("Next Question");
         newQuestion.setBounds(205,400,100,30);
         frame.add(newQuestion);
+
         JButton Submit = new JButton("Submit");
         Submit.setBounds(100,400,100,30);
         frame.add(Submit);
@@ -74,33 +50,85 @@ public class QuestionForm {
         text.setToolTipText("Enter your Question here.");
         text.setBounds(50,50,300,30);
         frame.add(text);
-
         if(aButton.isSelected())
         {
             answer = "a";
-
+            aTrue = true;
         }
         else if(bButton.isSelected())
         {
             answer = "b";
+            bTrue = true;
         }
         else if(cButton.isSelected())
         {
             answer = "c";
+            cTrue = true;
         }
         else if(dButton.isSelected())
         {
             answer = "d";
+            dTrue = true;
         }
         else
         {
             answer = "not selected";
+            noAnswer = true;
+        }
+        if(newQuestion.isSelected())
+        {
+            //will need to write all data that is stored then recall this function to open the form again
+            createQuestion();
+        }
+        if(Submit.isSelected())
+        {
+            //waiting until .json files work, This will be how they are written to Question.java (storage bank for MC Questions)
+        }
+
+    }
+    public void CreateTrueFalse()
+    {
+        JFrame frame = new JFrame();
+        frame.setLayout(null);
+        JLabel label = new JLabel("Enter your question and select the button that corresponds with the correct answer.");
+        frame.add(label);
+        JRadioButton T = new JRadioButton("True");
+        frame.add(T);
+        JRadioButton F = new JRadioButton("False");
+        frame.add(F);
+        JButton newQuestion = new JButton("Next Question");
+        frame.add(newQuestion);
+        JButton Submit = new JButton("Submit");
+        frame.add(Submit);
+        final int WIDTH = 20;
+        JTextField text = new JTextField(WIDTH);
+        text.setText(TFprompt);
+        text.setToolTipText("Enter your Question here.");
+        text.setBounds(50,50,300,30);
+        frame.add(text);
+        if(T.isSelected())
+        {
+            isTrue = true;
+            answer = "T";
+        }
+        else if(F.isSelected())
+        {
+            isFalse = true;
+            answer = "F";
+        }
+
+        if(Submit.isSelected())
+        {
+            //waiting until .json files work, This will be how they are written to True_False.java (storage bank for TF Questions)
+        }
+        if(newQuestion.isSelected())
+        {
+            //will need to write all data that is stored then recall this function to open the form again
+            createQuestion();
         }
 
 
     }
-
-
 
     public void editQuestion(){
 
