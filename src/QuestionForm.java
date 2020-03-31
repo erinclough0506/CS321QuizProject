@@ -90,6 +90,7 @@ public class QuestionForm {
     {
         JFrame frame = new JFrame();
         frame.setLayout(null);
+        frame.setVisible(true);
         JLabel label = new JLabel("Enter your question and select the button that corresponds with the correct answer.");
         frame.add(label);
         JRadioButton T = new JRadioButton("True");
