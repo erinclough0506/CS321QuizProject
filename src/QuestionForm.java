@@ -47,6 +47,7 @@ public class QuestionForm {
     public void createQuestion(){
         JFrame frame = new JFrame();
         frame.setLayout(null);
+        frame.setVisible(true);
         JRadioButton aButton = new JRadioButton(a);
         aButton.setBounds(100,120,100,30);
         frame.add(aButton);
@@ -73,6 +74,7 @@ public class QuestionForm {
         text.setToolTipText("Enter your Question here.");
         text.setBounds(50,50,300,30);
         frame.add(text);
+
         if(aButton.isSelected())
         {
             answer = "a";
