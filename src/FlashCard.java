@@ -1,4 +1,5 @@
-public class FlashCard {
+public class FlashCard
+{
 
 
 
