@@ -1,37 +1,51 @@
+import java.util.*;
+import java.util.Arrays;
+import java.io.*;
+
+
+
 public class True_False {
 
 
 
-
-
-public void getBank(){
-
-
-}
-
-public void sendBank(){
-
-
-}
+    String prompt;
+    String answer;
+    String correct_answer;
+    String incorrect_answer;
+    int correct = 0;
+    int incorrect= 0;
+    boolean answerB = false;
 
 
 
-public void Del_set() {
-
-}
+    True_False[] QuestionB = new True_False[10];
 
 
 
+    public String SetQuestion(True_False obj)
+    {
 
-public void EditSet(){
+        String Question = " ";
 
+        return Question;
 
-}
+    }
+    public Boolean SetFlag(String obj)
+    {
+        Boolean Flag = true;
 
-public void Prebuilt(){
+        if(obj == "T"){
 
-}
+            Flag = true;
+        }
+        if(obj ==" false")
+        {
+            Flag = false;
+        }
 
+        return Flag;
+
+    }
 
 
 
