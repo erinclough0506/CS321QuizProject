@@ -16,7 +16,7 @@ public class main {
     public static void main(String[] args) {
 
         System.out.println("Running Program");
-        JFrame StarterMessage = new JFrame();
+        final JFrame StarterMessage = new JFrame();
         JButton StartP=new JButton("Start Quiz Program");
 
         StartP.addActionListener(new ActionListener()
