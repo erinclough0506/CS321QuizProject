@@ -1,5 +1,9 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 
+
+//needed variables
 public class QuestionForm {
     //text fields for MC
     String a = " ";
@@ -8,6 +12,7 @@ public class QuestionForm {
     String d = " ";
     String prompt = " ";
     String answer = " ";
+    String Name = " ";
     // answer flags for MC
     boolean aTrue = false;
     boolean bTrue = false;
@@ -19,6 +24,28 @@ public class QuestionForm {
     boolean isTrue = false;
     boolean isFalse = false;
 
+    //function used to call either MC or TF
+    public void QFormMenu() {
+        JFrame selector = new JFrame();
+        selector.setLayout(new BorderLayout());
+        selector.setVisible(true);
+        JLabel label1 = new JLabel("Please select which type of question set you would like to build.");
+        selector.add(label1, BorderLayout.NORTH);
+        JButton Multi = new JButton("Multiple Choice");
+        JButton TF = new JButton("True/False");
+        selector.add(Multi, BorderLayout.WEST);
+        selector.add(TF,BorderLayout.EAST);
+        if(Multi.isSelected())
+        {
+            createQuestion();
+        } else if (TF.isSelected()) {
+            CreateTrueFalse();
+        }
+
+
+    }
+
+//MC Function
     public void createQuestion(){
         JFrame frame = new JFrame();
         frame.setLayout(null);
@@ -50,6 +77,10 @@ public class QuestionForm {
         text.setToolTipText("Enter your Question here.");
         text.setBounds(50,50,300,30);
         frame.add(text);
+        JTextField setname = new JTextField(WIDTH);
+        setname.setText(Name);
+        setname.setToolTipText("Enter Question Set Name Here");
+        frame.add(setname);
         if(aButton.isSelected())
         {
             answer = "a";
@@ -86,6 +117,7 @@ public class QuestionForm {
         }
 
     }
+    // TF function
     public void CreateTrueFalse()
     {
         JFrame frame = new JFrame();
@@ -107,6 +139,10 @@ public class QuestionForm {
         text.setToolTipText("Enter your Question here.");
         text.setBounds(50,50,300,30);
         frame.add(text);
+        JTextField setname = new JTextField(WIDTH);
+        setname.setText(Name);
+        setname.setToolTipText("Enter Question Set Name Here");
+        frame.add(setname);
         if(T.isSelected())
         {
             isTrue = true;
@@ -125,7 +161,7 @@ public class QuestionForm {
         if(newQuestion.isSelected())
         {
             //will need to write all data that is stored then recall this function to open the form again
-            createQuestion();
+            CreateTrueFalse();
         }
 
 
