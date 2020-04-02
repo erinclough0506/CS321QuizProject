@@ -2,6 +2,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.*;
 import java.util.Arrays;
 import java.io.*;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
+
+
+import org.w3c.dom.NodeList;
 
 
 public class True_False {
@@ -41,26 +48,23 @@ public class True_False {
         return Flag;
 
     }
-}
-    // will be used to read the XML file
-    /*
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-       try {
-               DocumentBuilder builder = factory.newDocumentBuilder();
-               Document doc = builder.parse("Items");
-               NodeList personList = doc.getElementsByTagName("Items");
 
-               personList.getLength();
-               }catch(ParserConfigurationException e ){
-               e.printStackTrace();
-               }
-               catch(SAXException e ){
-               e.printStackTrace();
-               }
-               catch(IOException e){
-               e.printStackTrace();
-               }
-//---------------------------------------------
-*/
+    public void ReadQuestions() {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        try {
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse("Items");
+            NodeList personList = doc.getElementsByTagName("Items");
+
+            personList.getLength();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}//---------------------------------------------
 
 
