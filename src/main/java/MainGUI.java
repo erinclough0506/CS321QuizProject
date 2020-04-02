@@ -10,27 +10,28 @@ public class MainGUI {
     public static void showMainMenu()
     {
         // Title page with Title and two options to either create a quiz or choose a quiz
-        // ****************** ADD text to Explain what to do when on menu screen
-        // Possibly make panel bigger??
+        // ***********************************************************************************
+        // 1. ADD text to Explain what to do when on menu screen
+        // 2. ADD buttons to other menu to be able to go back to Main Menu
+        // Create Frame
+        final JFrame Menu=new JFrame();
+
+        // Create Title Panel
         JPanel TitleP= new JPanel();              // Create Menu Panel
         TitleP.setLayout(new BorderLayout());     // Define Layout
-        JPanel Buttons=new JPanel();               // Create Button Panel
-        Buttons.setLayout(new FlowLayout());                 // Define Button Layout
+
         JLabel Title=new JLabel("Quiz Program"); // Set Title
         TitleP.add(Title,BorderLayout.NORTH);      // Define Title Layout
         Font TitleF=new Font("Courier",Font.BOLD,60);
         Title.setFont(TitleF);
 
-
-        Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
-        int height=screenSize.height;
-        int width=screenSize.width;
         // Create Buttons
+        JPanel Buttons=new JPanel();               // Create Button Panel
+        Buttons.setLayout(new FlowLayout());                 // Define Button Layout
         JButton PreSetQ= new JButton("Study Topics");
         JButton CreateQ= new JButton("Create Questions");
         Buttons.add(PreSetQ); // Set Button Layout
         Buttons.add(CreateQ);
-        final JFrame Menu=new JFrame(); // Create a Frame to Combine the two layout
         // Add Action to the buttons
         PreSetQ.addActionListener(new ActionListener()
         {
@@ -52,8 +53,11 @@ public class MainGUI {
             }
         });
 
+        Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
+        int height=screenSize.height;
+        int width=screenSize.width;
 
-        Menu.setState(Frame.NORMAL);
+        //Menu.setState(Frame.NORMAL);
         Menu.add(Title, BorderLayout.NORTH);
         Menu.add(Buttons,BorderLayout.CENTER);
         //Menu.setLocationRelativeTo(null);
@@ -65,22 +69,20 @@ public class MainGUI {
     }
     public static void PickTypeofTest()
     {
-
-        JPanel Choice= new JPanel();              // Create Menu Panel
+        // Create Frame
+        final JFrame Tests=new JFrame();
+        // Create Menu Panel
+        JPanel Choice= new JPanel();
         Choice.setLayout(new BorderLayout());     // Define Layout
-
-        JPanel Buttons=new JPanel();               // Create Button Panel
-        Buttons.setLayout(new FlowLayout());       // Define Button Layout
-
-        JLabel Title=new JLabel("Choose a Test or Study Option from the choices below "); // Set Title
+        JLabel Title=new JLabel("Choose a Test or Study Option from the Choices below "); // Set Title
         Choice.add(Title,BorderLayout.CENTER);     // Define Title Layout
         Font TitleF=new Font("Courier",Font.BOLD,20);
         Title.setFont(TitleF);
-        final JFrame Tests=new JFrame();                 // Create a Frame to Combine layouts
 
-        Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
-        int height=screenSize.height;
-        int width=screenSize.width;
+        // Create Button Panel
+        JPanel Buttons=new JPanel();               // Create Button Panel
+        Buttons.setLayout(new FlowLayout());       // Define Button Layout
+
 
         // Create Buttons
         JButton FlashCards= new JButton("FlashCards");
@@ -127,12 +129,16 @@ public class MainGUI {
             }
         });
 
-        Buttons.add(FlashCards); // Set Button Layout
+        Buttons.add(FlashCards); // Add Buttons to Panel Buttons
         Buttons.add(MultiChoice);
         Buttons.add(True_F);
         Buttons.add(FTest);
 
-        Tests.setState(Frame.NORMAL);
+        Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
+        int height=screenSize.height;
+        int width=screenSize.width;
+        // Add Components to Tests frame
+        //Tests.setState(Frame.NORMAL);
         Tests.add(Title, BorderLayout.NORTH);
         Tests.add(Buttons,BorderLayout.CENTER);
         Tests.setPreferredSize(new Dimension(width/2,height/2));
@@ -154,71 +160,63 @@ public class MainGUI {
     }
     public static void showQDesign()
     {
-        // Will gO to Question Form
-        JPanel Choice= new JPanel();              // Create Menu Panel
+        // Create a Frame
+        final JFrame Tests=new JFrame();
+        // Create Title Panel
+        JPanel Choice= new JPanel();
         Choice.setLayout(new BorderLayout());     // Define Layout
-
-        JPanel Buttons=new JPanel();               // Create Button Panel
-        Buttons.setLayout(new FlowLayout());       // Define Button Layout
-
-        JLabel Title=new JLabel("Choose a type of Questions you want to create from the choices below"); // Set Title
+        JLabel Title=new JLabel("Choose to Create Study Flashcards or Test Questions"); // Set Title
         Choice.add(Title,BorderLayout.CENTER);     // Define Title Layout
         Font TitleF=new Font("Courier",Font.BOLD,20);
         Title.setFont(TitleF);
-        final JFrame Tests=new JFrame();                 // Create a Frame to Combine layouts
 
-        Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
-        int height=screenSize.height;
-        int width=screenSize.width;
+        // Create Button Panel
+        JPanel Buttons=new JPanel();
+        Buttons.setLayout(new FlowLayout());       // Define Button Layout
 
         // Create Buttons
         JButton FlashCards= new JButton("FlashCards");
-        JButton MultiChoice= new JButton("Multiple Choice");
-        JButton True_F= new JButton("True False");
-        //JButton FTest= new JButton("Test All");
+        JButton TestQ= new JButton("Test Questions");
 
+        // Create Action for Buttons
         FlashCards.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
             {
                 System.out.println("FlashCards Pressed");
-                //FlashCardForm.createFlashcard();
+                FlashCardForm.CreateFlashcard();
                 Tests.dispose();
 
             }
         });
-        MultiChoice.addActionListener(new ActionListener()
+        TestQ.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
             {
-                System.out.println("MultiChoice Pressed");
-                //QuestionForm.createQuestion();
+                System.out.println("Test Questions Pressed");
+                QuestionForm.QFormMenu();
                 Tests.dispose();
-            }
-        });
-        True_F.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent event)
-            {
-                System.out.println("True False Pressed");
-                //QuestionForm.CreateTrueFalse();
-                Tests.dispose();
-
             }
         });
 
 
         Buttons.add(FlashCards); // Set Button Layout
-        Buttons.add(MultiChoice);
-        Buttons.add(True_F);
+        Buttons.add(TestQ);
 
-        Tests.setState(Frame.NORMAL);
+
+        // Set Screen Size
+        Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
+        int height=screenSize.height;
+        int width=screenSize.width;
+
+        // Add Components to Tests Frame
+        //Tests.setState(Frame.NORMAL);
         Tests.add(Title, BorderLayout.NORTH);
         Tests.add(Buttons,BorderLayout.CENTER);
         Tests.setPreferredSize(new Dimension(width/2,height/2));
         Tests.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Tests.pack();
-        Tests.setVisible(true);  // Choose from 3 different choices
+        Tests.setVisible(true);
     }
     public static void showTest()
     {
@@ -228,7 +226,7 @@ public class MainGUI {
     {
         // Displays Result of Test
     }
-
 }
+
 
 
