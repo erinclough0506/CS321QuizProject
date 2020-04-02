@@ -1,11 +1,10 @@
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.*;
 import java.util.Arrays;
 import java.io.*;
 
 
-
 public class True_False {
-
 
 
     String prompt;
@@ -13,40 +12,55 @@ public class True_False {
     String correct_answer;
     String incorrect_answer;
     int correct = 0;
-    int incorrect= 0;
+    int incorrect = 0;
     boolean answerB = false;
-
 
 
     True_False[] QuestionB = new True_False[10];
 
 
-
-    public String SetQuestion(True_False obj)
-    {
+    public String SetQuestion(String obj) {
 
         String Question = " ";
 
         return Question;
 
     }
-    public Boolean SetFlag(String obj)
-    {
+
+    public Boolean SetFlag(String obj) {
         Boolean Flag = true;
 
-        if(obj == "T"){
+        if (obj == "true") {
 
             Flag = true;
         }
-        if(obj ==" false")
-        {
+        if (obj == " false") {
             Flag = false;
         }
 
         return Flag;
 
     }
-
-
-
 }
+    // will be used to read the XML file
+    /*
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+       try {
+               DocumentBuilder builder = factory.newDocumentBuilder();
+               Document doc = builder.parse("Items");
+               NodeList personList = doc.getElementsByTagName("Items");
+
+               personList.getLength();
+               }catch(ParserConfigurationException e ){
+               e.printStackTrace();
+               }
+               catch(SAXException e ){
+               e.printStackTrace();
+               }
+               catch(IOException e){
+               e.printStackTrace();
+               }
+//---------------------------------------------
+*/
+
+
