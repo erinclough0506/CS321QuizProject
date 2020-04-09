@@ -20,8 +20,64 @@ public class MultipleChoice {
 
     public static void main(String[] args) {
         // write your code here
+        boolean run = true;
+        String trueFlag = "true";
+        String falseFlag = "false";
+        Scanner input = new Scanner(System.in);
+        ArrayList<Question> List = new ArrayList<Question>();
+        int counter = 0;
+        while (run) {
+            System.out.println("Enter your question");
+            String QPrompt = input.nextLine();
+            System.out.println("enter response 1");
+            String Response1 = input.nextLine();
+            System.out.println("Enter rather this response is T or F");
+            String Resp1_flag = input.nextLine();
+            Resp1_flag.toLowerCase();
+            if (Resp1_flag.equals(trueFlag) || Resp1_flag.equals(falseFlag)) {
+                System.out.println("response set");
+            } else {
+                System.out.println("Invalid response");
+                continue;
+            }
+            System.out.println("enter response 2");
+            String Response2 = input.nextLine();
+            System.out.println("Enter rather this response is T or F");
+            String Resp2_flag = input.nextLine();
+            Resp2_flag.toLowerCase();
+            if (Resp2_flag.equals(trueFlag) || Resp2_flag.equals(falseFlag)) {
+                System.out.println("response set");
+            } else {
+                System.out.println("Invalid response");
+                continue;
+            }
+            System.out.println("enter response 3");
+            String Response3 = input.nextLine();
+            System.out.println("Enter rather this response is T or F");
+            String Resp3_flag = input.nextLine();
+            Resp3_flag.toLowerCase();
+            if (Resp3_flag.equals(trueFlag) || Resp3_flag.equals(falseFlag)) {
+                System.out.println("response set");
+            } else {
+                System.out.println("Invalid response");
+                continue;
+            }
+            Question question = new Question(counter = counter+1, QPrompt, Response1, Response2, Response3, Resp1_flag, Resp2_flag, Resp3_flag);
+            List.add(question);
+            System.out.println("Would you like to create another question? (Y/N)");
+            String exitPrompt = input.nextLine();
+            if (exitPrompt.equals("Y") || exitPrompt.equals("y")) {
+                continue;
 
-        int number = 1;
+            } else if (exitPrompt.equals("N") || exitPrompt.equals("n")) {
+                run = false;
+            } else {
+                System.out.println("Invalid Response");
+                run = false;
+            }
+        }
+
+        /*int number = 1;
         String QPrompt = "Static ports are used for what information";
         String Response1 = "altitude,airspeed";
         String Response2 = "wind direction";
@@ -32,7 +88,6 @@ public class MultipleChoice {
 
 
         Question question1 = new Question(1, QPrompt, Response1, Response2, Response3, Resp1_flag, Resp2_flag, Resp3_flag);
-
         Question question2 = new Question(1, QPrompt, Response1, Response2, Response3, Resp1_flag, Resp2_flag, Resp3_flag);
         Question question3 = new Question(1, QPrompt, Response1, Response2, Response3, Resp1_flag, Resp2_flag, Resp3_flag);
         // Question1 question4 = new Question1(1,QPrompt,Response1,Response2,Response3,Resp1_flag,Resp2_flag,Resp3_flag);
@@ -44,6 +99,8 @@ public class MultipleChoice {
         List.add(question3);
 
         // Question1[] List = new Question1[] {question1,question2,question3,question4,question5};
+        */
+
 
 
         try {
