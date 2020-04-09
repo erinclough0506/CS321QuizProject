@@ -17,7 +17,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.transform.dom.DOMSource;
 
-public class CreateXML {
+public class True_False {
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
 
 
