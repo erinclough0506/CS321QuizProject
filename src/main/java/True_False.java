@@ -26,7 +26,7 @@ public class CreateXML {
         //Temporary driver
         //----------------------------------------
 
-        True_False Item = new True_False();
+       // True_False Item = new True_False();
         Scanner myObj = new Scanner(System.in);
         System.out.println("Write your question");
 
