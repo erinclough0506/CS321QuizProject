@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
+import java.util.Scanner;
+import java.io.*;
+import java.util.Comparator;
+import java.util.ArrayList;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.*;
 import javax.swing.*;
 public class MainGUI {
     public static void showMainMenu()
@@ -13,6 +20,7 @@ public class MainGUI {
         // ***********************************************************************************
         // 1. ADD text to Explain what to do when on menu screen
         // 2. ADD buttons to other menu to be able to go back to Main Menu
+
         // Create Frame
         final JFrame Menu=new JFrame();
 
@@ -28,7 +36,7 @@ public class MainGUI {
         // Create Buttons
         JPanel Buttons=new JPanel();               // Create Button Panel
         Buttons.setLayout(new FlowLayout());                 // Define Button Layout
-        JButton PreSetQ= new JButton("Study Topics");
+        JButton PreSetQ= new JButton("Study Options");
         JButton CreateQ= new JButton("Create Questions");
         Buttons.add(PreSetQ); // Set Button Layout
         Buttons.add(CreateQ);
@@ -137,8 +145,8 @@ public class MainGUI {
         Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height=screenSize.height;
         int width=screenSize.width;
+
         // Add Components to Tests frame
-        //Tests.setState(Frame.NORMAL);
         Tests.add(Title, BorderLayout.NORTH);
         Tests.add(Buttons,BorderLayout.CENTER);
         Tests.setPreferredSize(new Dimension(width/2,height/2));
