@@ -1,5 +1,7 @@
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
@@ -347,4 +349,52 @@ public class QuestionForm {
             System.out.println("Couldn't Save");
         }
     }
+
+
+
+    //------------------------------------------------------------------
+    // This is the read function for printing out the XML file to the screen and GUI;
+
+    public static void getQuestion(Document doc)
+    {
+        NodeList QuestionList = doc.getElementsByTagName("QuestionNum");
+        for(int i=0; i<QuestionList.getLength(); i++)
+        {
+            Node QuestionNode = QuestionList.item(i);
+            if(QuestionNode.getNodeType() == Node.ELEMENT_NODE)
+            {
+                Element QuestionElement = (Element) QuestionNode;
+                // String QuestionId = QuestionElement.getElementsByTagName("QuestionNum").item(0).getTextContent();
+                String QuestionName = QuestionElement.getElementsByTagName("Question").item(0).getTextContent();
+                String Response1 = QuestionElement.getElementsByTagName("Response_1").item(0).getTextContent();
+                String Response2 = QuestionElement.getElementsByTagName("Response_2").item(0).getTextContent();
+                String Response3 = QuestionElement.getElementsByTagName("Response_3").item(0).getTextContent();
+                String Question1Flag = QuestionElement.getElementsByTagName("Flag_1").item(0).getTextContent();
+                String Question2Flag = QuestionElement.getElementsByTagName("Flag_2").item(0).getTextContent();
+                String Question3Flag = QuestionElement.getElementsByTagName("Flag_3").item(0).getTextContent();
+
+
+                // System.out.println("Question Number = " + QuestionId);
+                System.out.println("Question = " + QuestionName);
+                System.out.println("Choice 1: " + Response1);
+                System.out.println("Choice 2: " + Response2);
+                System.out.println("Choice 3: " + Response3);
+                System.out.println("The first question is " + Question1Flag);
+                System.out.println("The second question is " + Question2Flag);
+                System.out.println("The third question is " + Question2Flag);
+
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 }
