@@ -52,9 +52,8 @@ public class QuestionForm {
 
     public static void QFormMenu() {
         // Create Frame
-        final JFrame selector = new JFrame();
+        JFrame selector = new JFrame();
         selector.setLayout(new BorderLayout());
-        MCList = new ArrayList<MultipleChoice>();
         // Create Title
         JLabel label1 = new JLabel("Please select which type of Question set you would like to build.");
         selector.add(label1, BorderLayout.NORTH);
@@ -94,10 +93,10 @@ public class QuestionForm {
         selector.pack();
         selector.setVisible(true);
     }
-
+    //***************************Create MC Question*************************************************************************************
     public static void createQuestion() {
         // Create Frame
-        final JFrame frame = new JFrame();
+        JFrame frame = new JFrame();
         AnswersPanel.setLayout(new BoxLayout(AnswersPanel, BoxLayout.Y_AXIS));
 
         // Create Title
@@ -258,8 +257,8 @@ public class QuestionForm {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
-
-
+    //***************************************************************************************************************************************
+//************************Create Array to hold prebuilt Questions*******************************************************************
     public static void getOMCQuestions()
     {
         // Class that sends selected Multiple choice form to an array
@@ -268,11 +267,12 @@ public class QuestionForm {
         getQuestions(OMCList);
         MCPlayer();
     }
+    //*******************Displays Test for Multiple Choice*********************************************************************************8
     public static void MCPlayer() {
 
         // Answers Panel
         AnswersPanel.setLayout(new BoxLayout(AnswersPanel, BoxLayout.Y_AXIS));
-
+        System.out.println("Question: " + numb);
         // Create Text Boxes
         questionOMC.setText(OMCList.get(numb).getQuestion());
         Font TitleF = new Font("Courier", Font.BOLD, 20);
@@ -343,7 +343,7 @@ public class QuestionForm {
                 numb=numb+1;
                 numb2=numb2+1;
                 if (end==false) {
-                    if (numb2 >= OMCList.size()) {
+                    if (numb2 > OMCList.size()) {
                         nextQuestion.setText("Submit Test");
                         end = true;
                         //Test.dispose();
