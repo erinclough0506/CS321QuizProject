@@ -22,9 +22,8 @@ import java.util.*;
 // 1. Add Code for if both RADIO BUTTONS were pressed go to an icon error or find a way so that only one or the other is pressed
 public class QuestionForm {
 
-
-
     private static JTextArea questionMC;
+    private static JLabel questionOMC=new JLabel("");
     private static JTextArea A;
     private static JTextArea B;
     private static JTextArea C;
@@ -38,8 +37,18 @@ public class QuestionForm {
     static String bTrue = "F";
     static String cTrue = "F";
 
+    static boolean end=false;
+    static int numb=0;
+    static int numb2=1;
+    static int correct=0;
+
+    static JFrame Test = new JFrame();
+    static Container AnswersPanel = Test.getContentPane();
+    static JButton nextQuestion = new JButton("Next Question");
+    static JPanel Buttons = new JPanel();
 
     private static ArrayList<MultipleChoice> MCList = new ArrayList<MultipleChoice>();
+    private static ArrayList<MultipleChoice> OMCList = new ArrayList<MultipleChoice>();
 
     public static void QFormMenu() {
         // Create Frame
@@ -87,10 +96,8 @@ public class QuestionForm {
     }
 
     public static void createQuestion() {
-
         // Create Frame
         final JFrame frame = new JFrame();
-        Container AnswersPanel = frame.getContentPane();
         AnswersPanel.setLayout(new BoxLayout(AnswersPanel, BoxLayout.Y_AXIS));
 
         // Create Title
@@ -186,7 +193,7 @@ public class QuestionForm {
                 //JFileChooser fileSave = new JFileChooser();
                 System.out.println("Size of Final ArrayList " + MCList.size());
                 //fileSave.showSaveDialog(frame);
-                saveFile();
+                File();
                 MainGUI.showMainMenu();
                 frame.dispose();
 
@@ -226,7 +233,6 @@ public class QuestionForm {
         dPanel.setLayout(new FlowLayout());
         ;
 
-        JPanel Buttons = new JPanel();
         Buttons.setLayout(new FlowLayout());
         Buttons.add(Submit);
         Buttons.add(newQuestion);
@@ -254,13 +260,153 @@ public class QuestionForm {
     }
 
 
+    public static void getOMCQuestions()
+    {
+        // Class that sends selected Multiple choice form to an array
+        numb=0; // Reinitialize
+        numb2=1;
+        getQuestions(OMCList);
+        MCPlayer();
+    }
+    public static void MCPlayer() {
 
-    public static void editQuestion() {
+        // Answers Panel
+        AnswersPanel.setLayout(new BoxLayout(AnswersPanel, BoxLayout.Y_AXIS));
 
+        // Create Text Boxes
+        questionOMC.setText(OMCList.get(numb).getQuestion());
+        Font TitleF = new Font("Courier", Font.BOLD, 20);
+        questionOMC.setFont(TitleF);
+
+        aButton.setText(OMCList.get(numb).getAnswerA());
+        bButton.setText(OMCList.get(numb).getAnswerB());
+        cButton.setText(OMCList.get(numb).getAnswerC());
+
+        // Create Radio Button Action Listener
+        aButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                if (aButton.isSelected()) {
+                    System.out.println("ButtonA Selected");
+                    aTrue = "T";
+                    bTrue = "F";
+                    cTrue = "F";
+
+                    bButton.setSelected(false);
+                    cButton.setSelected(false);
+
+                } else {
+                    System.out.println("ButtonA not selected");
+                    aTrue = "F";
+                }
+            }
+        });
+        bButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                if (bButton.isSelected()) {
+                    System.out.println("ButtonB Selected");
+                    bTrue = "T";
+                    aTrue = "F";
+                    cTrue = "F";
+
+                    aButton.setSelected(false);
+                    cButton.setSelected(false);
+
+                } else {
+                    System.out.println("ButtonB not selected");
+                    bTrue = "F";
+                }
+
+            }
+        });
+        cButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                if (cButton.isSelected()) {
+                    System.out.println("ButtonC Selected");
+                    cTrue = "T";
+                    aTrue = "F";
+                    bTrue = "F";
+
+                    aButton.setSelected(false);
+                    bButton.setSelected(false);
+
+                } else {
+                    System.out.println("ButtonC not selected");
+                    cTrue = "F";
+                }
+
+            }
+        });
+
+        nextQuestion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                System.out.println("Next Question Selected");
+                numb=numb+1;
+                numb2=numb2+1;
+                if (end==false) {
+                    if (numb2 >= OMCList.size()) {
+                        nextQuestion.setText("Submit Test");
+                        end = true;
+                        //Test.dispose();
+                    } else {
+                        MCPlayer();
+                    }
+                }
+                else
+                {
+                    Test.dispose();
+                }
+
+            }
+        });
+
+
+
+        Buttons.setLayout(new FlowLayout());
+        //Buttons.add(Submit);
+        Buttons.add(nextQuestion);
+
+        // Add Panels to Frame
+        AnswersPanel.add(questionOMC);
+        questionOMC.setAlignmentX(Component.LEFT_ALIGNMENT);
+        AnswersPanel.add(aButton);
+        //aPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        AnswersPanel.add(bButton);
+        //bPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        AnswersPanel.add(cButton);
+        //cPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        AnswersPanel.add(Buttons);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
+        int height = screenSize.height;
+        int width = screenSize.width;
+        Test.setPreferredSize(new Dimension(width / 2, height / 2));
+        Test.setVisible(true);
+        Test.pack();
+        Test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
 
 
+    private static void checkAnswer() {
+        questionMC.setText("Enter a Question");
+        questionMC.requestFocus();
+        A.setText("Enter an Answer");
+
+        B.setText("Enter an Answer");
+
+        C.setText("Enter an Answer");
+
+
+
+        aButton.setSelected(false);
+        bButton.setSelected(false);
+        cButton.setSelected(false);
+
+        aTrue = "F";
+        bTrue = "F";
+        cTrue = "F";
+
+    }
 
     private static void clearMCPage() {
         questionMC.setText("Enter a Question");
@@ -283,8 +429,49 @@ public class QuestionForm {
 
     }
 
-    public static void saveFile() {
+    public static void getQuestions(ArrayList<MultipleChoice> List) {
+        // Create Frame
 
+        try {
+            File MCXML = new File("Multiple_Choice.xml");
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(MCXML);
+            System.out.println("Root element:"+ doc.getDocumentElement().getNodeName());
+            NodeList QuestionList = doc.getElementsByTagName("QuestionNum");
+            System.out.println("Length=" + QuestionList.getLength());
+            for (int i = 0; i < QuestionList.getLength(); i++) {
+                Node QuestionNode = QuestionList.item(i);
+                if (QuestionNode.getNodeType() == Node.ELEMENT_NODE) {
+                    System.out.println("getNode");
+                    Element QuestionElement = (Element) QuestionNode;
+                    String QuestionId = QuestionElement.getAttribute("Number");
+                    System.out.println("Question Number = " + QuestionId);
+                    String QuestionName = QuestionElement.getElementsByTagName("Question").item(0).getTextContent();
+                    System.out.println("Question = " + QuestionName);
+                    String QuestionResponse1 = QuestionElement.getElementsByTagName("Response1").item(0).getTextContent();
+                    System.out.println("Answer1= " + QuestionResponse1);
+                    String QuestionFlag1 = QuestionElement.getElementsByTagName("Flag_1").item(0).getTextContent();
+                    System.out.println("Answer1 Flag = " + QuestionFlag1);
+
+                    String QuestionResponse2 = QuestionElement.getElementsByTagName("Response_2").item(0).getTextContent();
+                    System.out.println("Answer2 = " + QuestionResponse2);
+                    String QuestionFlag2 = QuestionElement.getElementsByTagName("Flag_2").item(0).getTextContent();
+                    System.out.println("Answer2 Flag = " + QuestionFlag2);
+                    String QuestionResponse3 = QuestionElement.getElementsByTagName("Response_3").item(0).getTextContent();
+                    System.out.println("Answer3  = " + QuestionResponse3);
+                    String QuestionFlag3 = QuestionElement.getElementsByTagName("Flag_3").item(0).getTextContent();
+                    System.out.println("Answer3 Flag = " + QuestionFlag3);
+                    MultipleChoice Form = new MultipleChoice(i, QuestionName, QuestionResponse1, QuestionResponse2, QuestionResponse3, QuestionFlag1, QuestionFlag2, QuestionFlag3);
+                    List.add(Form);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Couldn't Save");
+        }
+    }
+    public static void File() {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -335,66 +522,26 @@ public class QuestionForm {
                 NumberElement.appendChild(Flag_Element3);
                 //------------------------------------------------------------------
 
+                   /* Element NumberElementEnd = doc.createElement("QuestionNum");
+                    NumberElement.setAttribute("Number", "");
+                    rootElement.appendChild(NumberElementEnd);*/
+
+
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                StreamResult result = new StreamResult(new File("Multiple_Choice.xml"));
+                DOMSource dom = new DOMSource(doc);
+                transformer.transform(dom, result);
             }
 
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            DOMSource dom = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File("Multiple_Choice.xml"));
-            transformer.transform(dom, result);
+        }
 
-        } catch (Exception e) {
+        catch(Exception e){
             e.printStackTrace();
             System.out.println("Couldn't Save");
+
         }
     }
-
-
-
-    //------------------------------------------------------------------
-    // This is the read function for printing out the XML file to the screen and GUI;
-
-    public static void getQuestion(Document doc)
-    {
-        NodeList QuestionList = doc.getElementsByTagName("QuestionNum");
-        for(int i=0; i<QuestionList.getLength(); i++)
-        {
-            Node QuestionNode = QuestionList.item(i);
-            if(QuestionNode.getNodeType() == Node.ELEMENT_NODE)
-            {
-                Element QuestionElement = (Element) QuestionNode;
-                // String QuestionId = QuestionElement.getElementsByTagName("QuestionNum").item(0).getTextContent();
-                String QuestionName = QuestionElement.getElementsByTagName("Question").item(0).getTextContent();
-                String Response1 = QuestionElement.getElementsByTagName("Response_1").item(0).getTextContent();
-                String Response2 = QuestionElement.getElementsByTagName("Response_2").item(0).getTextContent();
-                String Response3 = QuestionElement.getElementsByTagName("Response_3").item(0).getTextContent();
-                String Question1Flag = QuestionElement.getElementsByTagName("Flag_1").item(0).getTextContent();
-                String Question2Flag = QuestionElement.getElementsByTagName("Flag_2").item(0).getTextContent();
-                String Question3Flag = QuestionElement.getElementsByTagName("Flag_3").item(0).getTextContent();
-
-
-                // System.out.println("Question Number = " + QuestionId);
-                System.out.println("Question = " + QuestionName);
-                System.out.println("Choice 1: " + Response1);
-                System.out.println("Choice 2: " + Response2);
-                System.out.println("Choice 3: " + Response3);
-                System.out.println("The first question is " + Question1Flag);
-                System.out.println("The second question is " + Question2Flag);
-                System.out.println("The third question is " + Question2Flag);
-
-            }
-        }
-    }
-
-
-
-
-
-
-
-
-
-
 
 }
