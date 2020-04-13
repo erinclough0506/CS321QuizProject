@@ -19,7 +19,6 @@ import java.io.*;
 import java.util.*;
 
 // ************************************************************************************************************
-// 1. Add Code for if both RADIO BUTTONS were pressed go to an icon error or find a way so that only one or the other is pressed
 public class QuestionForm {
 
     private static JTextArea questionMC;
@@ -67,11 +66,14 @@ public class QuestionForm {
         buttons.setLayout(new FlowLayout());
         buttons.add(Multi);
         buttons.add(TF);
+
+        /////////////////////////////////////Action Buttons////////////////////////////////////////////////////////////////
         Multi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("Multiple Choice Selected");
-                createQuestion();
-                selector.dispose();
+                createQuestion(); // Sends to createQuestion() function that creates MC menu
+                selector.dispose(); // Removes previous frame
+                // Sends to MC question screen
 
             }
         });
@@ -79,10 +81,12 @@ public class QuestionForm {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("TrueFalse Selected");
                 True_FalseForm.CreateTrueFalse();
-                selector.dispose();
+                selector.dispose(); // Removes previous frame
+                // Sends to true false menu
 
             }
         });
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height = screenSize.height;
         int width = screenSize.width;
@@ -126,7 +130,7 @@ public class QuestionForm {
         QScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         QScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        // Create Radio Button Action Listener
+        /////////////////////////////////// Create Radio Button Action Listener//////////////////////////////////////////
         aButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 if (aButton.isSelected()) {
@@ -181,11 +185,12 @@ public class QuestionForm {
             }
         });
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // Create Buttons
         JButton Submit = new JButton("Submit");
         JButton newQuestion = new JButton("Next Question");
+//////////////////////////////////////////Action Buttons////////////////////////////////////////////////////////////
         Submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("Submit Selected");
@@ -197,7 +202,7 @@ public class QuestionForm {
                 //fileSave.showSaveDialog(frame);
                 File();
                 MainGUI.showMainMenu();
-                frame.dispose();
+                frame.dispose(); // Disposes original frame
 
 
             }
@@ -213,7 +218,7 @@ public class QuestionForm {
 
             }
         });
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Create Panels
         JPanel Titled = new JPanel();
         Titled.setLayout(new BorderLayout());
