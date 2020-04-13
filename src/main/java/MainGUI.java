@@ -5,13 +5,6 @@ import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
-import java.util.Scanner;
-import java.io.*;
-import java.util.Comparator;
-import java.util.ArrayList;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.*;
 import javax.swing.*;
 public class MainGUI {
     public static void showMainMenu()
@@ -113,7 +106,7 @@ public class MainGUI {
             public void actionPerformed(ActionEvent event)
             {
                 System.out.println("MultiChoice Pressed");
-                showMulti();
+                QuestionForm.getOMCQuestions();
                 Tests.dispose();
             }
         });
@@ -160,7 +153,8 @@ public class MainGUI {
     }
     public static void showMulti()
     {
-        // Pick Type of Multiple Choice
+        System.out.println("Show Multi");
+
     }
     public static void showT_F()
     {
@@ -235,6 +229,3 @@ public class MainGUI {
         // Displays Result of Test
     }
 }
-
-
-
