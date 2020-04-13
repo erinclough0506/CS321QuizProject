@@ -43,16 +43,17 @@ public class QuestionForm {
     static int correct=0;
 
     static JFrame Test = new JFrame();
-    static Container AnswersPanel = Test.getContentPane();
+
     static JButton nextQuestion = new JButton("Next Question");
     static JPanel Buttons = new JPanel();
+    static JPanel Buttons2 = new JPanel();
 
     private static ArrayList<MultipleChoice> MCList = new ArrayList<MultipleChoice>();
     private static ArrayList<MultipleChoice> OMCList = new ArrayList<MultipleChoice>();
 
     public static void QFormMenu() {
         // Create Frame
-        JFrame selector = new JFrame();
+        final JFrame selector = new JFrame();
         selector.setLayout(new BorderLayout());
         // Create Title
         JLabel label1 = new JLabel("Please select which type of Question set you would like to build.");
@@ -96,8 +97,10 @@ public class QuestionForm {
     //***************************Create MC Question*************************************************************************************
     public static void createQuestion() {
         // Create Frame
-        JFrame frame = new JFrame();
-        AnswersPanel.setLayout(new BoxLayout(AnswersPanel, BoxLayout.Y_AXIS));
+        final JFrame frame = new JFrame();
+        Container Answer2Panel = frame.getContentPane();
+
+        Answer2Panel.setLayout(new BoxLayout(Answer2Panel, BoxLayout.Y_AXIS));
 
         // Create Title
         JLabel label = new JLabel("Enter your Question and Select the A,B,C, or D button that corresponds with the correct answer.");
@@ -228,10 +231,8 @@ public class QuestionForm {
         cPanel.setLayout(new FlowLayout());
         cPanel.add(cButton);
         cPanel.add(C);
-        JPanel dPanel = new JPanel();
-        dPanel.setLayout(new FlowLayout());
-        ;
 
+        ;
         Buttons.setLayout(new FlowLayout());
         Buttons.add(Submit);
         Buttons.add(newQuestion);
@@ -240,17 +241,16 @@ public class QuestionForm {
         int height = screenSize.height;
         int width = screenSize.width;
         // Add Panels to Frame
-        AnswersPanel.add(Titled);
+        Answer2Panel.add(Titled);
         Titled.setAlignmentX(Component.CENTER_ALIGNMENT);
-        AnswersPanel.add(aPanel);
+        Answer2Panel.add(aPanel);
         aPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        AnswersPanel.add(bPanel);
+        Answer2Panel.add(bPanel);
         bPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        AnswersPanel.add(cPanel);
+        Answer2Panel.add(cPanel);
         cPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
-        AnswersPanel.add(Buttons);
+        Answer2Panel.add(Buttons);
         frame.setPreferredSize(new Dimension(width / 2, height / 2));
         frame.setVisible(true);
         frame.pack();
@@ -271,8 +271,8 @@ public class QuestionForm {
     public static void MCPlayer() {
 
         // Answers Panel
+        Container AnswersPanel = Test.getContentPane();
         AnswersPanel.setLayout(new BoxLayout(AnswersPanel, BoxLayout.Y_AXIS));
-        System.out.println("Question: " + numb);
         // Create Text Boxes
         questionOMC.setText(OMCList.get(numb).getQuestion());
         Font TitleF = new Font("Courier", Font.BOLD, 20);
@@ -361,9 +361,9 @@ public class QuestionForm {
 
 
 
-        Buttons.setLayout(new FlowLayout());
+        Buttons2.setLayout(new FlowLayout());
         //Buttons.add(Submit);
-        Buttons.add(nextQuestion);
+        Buttons2.add(nextQuestion);
 
         // Add Panels to Frame
         AnswersPanel.add(questionOMC);
@@ -375,7 +375,7 @@ public class QuestionForm {
         AnswersPanel.add(cButton);
         //cPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        AnswersPanel.add(Buttons);
+        AnswersPanel.add(Buttons2);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height = screenSize.height;
         int width = screenSize.width;
