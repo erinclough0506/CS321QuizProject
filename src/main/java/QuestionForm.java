@@ -347,7 +347,7 @@ public class QuestionForm {
                 System.out.println("Next Question Selected");
                 numb=numb+1;
                 numb2=numb2+1;
-                if (end==false) {
+                if (!end) {
                     if (numb2 > OMCList.size()) {
                         nextQuestion.setText("Submit Test");
                         end = true;
