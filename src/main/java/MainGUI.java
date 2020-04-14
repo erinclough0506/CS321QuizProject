@@ -33,11 +33,12 @@ public class MainGUI {
         JButton CreateQ= new JButton("Create Questions");
         Buttons.add(PreSetQ); // Set Button Layout
         Buttons.add(CreateQ);
-        // Add Action to the buttons
+        /////////////////////////////////////Action Buttons////////////////////////////////////////////////////////////////
         PreSetQ.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
             {
+                // Sends to Preset Questions
                 System.out.println("Study Topics Pressed");
                 PickTypeofTest();
                 Menu.dispose();
@@ -48,12 +49,13 @@ public class MainGUI {
         {
             public void actionPerformed(ActionEvent event)
             {
+                // Sends to Preset Questions
                 System.out.println("Create Questions Pressed");
                 showQDesign();
                 Menu.dispose();
             }
         });
-
+////////////////////////////////////////////////////////////////////////////////////
         Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height=screenSize.height;
         int width=screenSize.width;
