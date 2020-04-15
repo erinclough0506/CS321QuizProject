@@ -89,7 +89,6 @@ public class MainGUI {
         JButton FlashCards= new JButton("FlashCards");
         JButton MultiChoice= new JButton("Multiple Choice");
         JButton True_F= new JButton("True False");
-        JButton FTest= new JButton("Test All");
 
         FlashCards.addActionListener(new ActionListener()
         {
@@ -115,25 +114,16 @@ public class MainGUI {
             public void actionPerformed(ActionEvent event)
             {
                 System.out.println("True False Pressed");
-                showT_F();
+                True_FalseForm.createTest();
                 Tests.dispose();
 
             }
         });
-        FTest.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent event)
-            {
-                System.out.println("FTest Pressed");
-                showTest();
-                Tests.dispose();
-            }
-        });
+
 
         Buttons.add(FlashCards); // Add Buttons to Panel Buttons
         Buttons.add(MultiChoice);
         Buttons.add(True_F);
-        Buttons.add(FTest);
 
         Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height=screenSize.height;
@@ -204,6 +194,7 @@ public class MainGUI {
 
         Buttons.add(FlashCards); // Set Button Layout
         Buttons.add(TestQ);
+
 
 
         // Set Screen Size

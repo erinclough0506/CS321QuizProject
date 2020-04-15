@@ -389,8 +389,9 @@ public class QuestionForm {
                 }
                 else
                 {
-                    //prints final score at end of test
                     //where the score needs to be displayed
+
+                    //prints final score at end of test
                     System.out.println("Final score: " + score + "/" + OMCList.size());
                     Test.dispose();
                 }
