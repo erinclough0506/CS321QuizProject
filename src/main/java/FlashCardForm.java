@@ -25,7 +25,6 @@ public class FlashCardForm {
     // and sending the user created flashcards to be stored.
     private static JTextArea question;
     private static JTextArea answer;
-    //private static ArrayList<FlashCard> cardList;
     private static JTextArea QuestD=new JTextArea(10,20);;
     private static JTextArea AnswerD=new JTextArea(10,20);;
     static JFrame flashCardF=new JFrame("Study FlashCard");
