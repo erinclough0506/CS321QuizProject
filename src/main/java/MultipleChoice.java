@@ -69,26 +69,4 @@ public class MultipleChoice {
 
 
 
-    /*   private static void getQuestion(Document doc)
-    {
-        NodeList QuestionList = doc.getElementsByTagName("QuestionNum");
-        for(int i=0; i<QuestionList.getLength(); i++)
-        {
-            Node QuestionNode = QuestionList.item(i);
-            if(QuestionNode.getNodeType() == Node.ELEMENT_NODE)
-            {
-                Element QuestionElement = (Element) QuestionNode;
-                String QuestionId = QuestionElement.getElementsByTagName("num").item(0).getTextContent();
-                String QuestionName = QuestionElement.getElementsByTagName("Question").item(0).getTextContent();
-                String QuestionFlag = QuestionElement.getElementsByTagName("Flag").item(0).getTextContent();
-                System.out.println("Question Number = " + QuestionId);
-                System.out.println("Question = " + QuestionName);
-                System.out.println("Question Flag = " + QuestionFlag);
-
-            }
-        }
-    }
-    }
-  */
-
 }

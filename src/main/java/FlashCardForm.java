@@ -18,9 +18,10 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+
 public class FlashCardForm {
-    //Similar to QuestionForm, this class acts as a
-    // //template for creating flashcards. It
+    // Similar to QuestionForm, this class acts as a
+    // template for creating flashcards. It
     // is responsible for getting user input
     // and sending the user created flashcards to be stored.
     private static JTextArea question;
@@ -33,93 +34,99 @@ public class FlashCardForm {
     static JButton Main=new JButton("Exit to Main");
     static JPanel Buttons=new JPanel (new FlowLayout());
     static JScrollPane QScroll=new JScrollPane(QuestD);
-
+    private static int counter=0;
     private static int numb=0;
     private static int numb2=0;
     private static boolean pressed=false;
-    private static ArrayList<FlashCard> cardList=new ArrayList<FlashCard>();;
+    private static boolean end=false;
+    private static ArrayList<FlashCard> cardList=new ArrayList<FlashCard>();
     private static ArrayList<FlashCard> OFCList = new ArrayList<FlashCard>();
 
 
-    public static void CreateFlashcard() {
-        JPanel mainPanel = new JPanel();
-        Font TextF = new Font("Courier", Font.BOLD, 20);
-        final JFrame frame=new JFrame("Flash Card");;
-
+    public static void CreateFlashcard()
+    {
+        final JFrame frame =new JFrame("Flash Card");
+        JPanel mainPanel=new JPanel();
+        Font TextF=new Font("Courier",Font.BOLD,20);
         // Text Area Question
-        question = new JTextArea(6, 20);
+        question=new JTextArea(6,20);
         question.setLineWrap(true);
         question.setWrapStyleWord(true);
         question.setFont(TextF);
         // Text Area Answer
-        answer = new JTextArea(6, 20);
+        answer=new JTextArea(6,20);
         answer.setLineWrap(true);
         answer.setWrapStyleWord(true);
         answer.setFont(TextF);
         // Jscroll Pane
-        JScrollPane QScroll = new JScrollPane(question);
+        JScrollPane QScroll=new JScrollPane(question);
         QScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         QScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        JScrollPane AScroll = new JScrollPane(answer);
+        JScrollPane AScroll=new JScrollPane(answer);
         AScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         AScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         // Labels
-        JLabel QLabel = new JLabel("Question");
-        JLabel ALabel = new JLabel("Answer");
+        JLabel QLabel=new JLabel("Question");
+        JLabel ALabel=new JLabel("Answer");
 
         // Buttons
-        JPanel Buttons = new JPanel();
+        JPanel Buttons=new JPanel();
         Buttons.setLayout(new FlowLayout());
-        JButton nextButton = new JButton("Next Card");
-        JButton Submit = new JButton("Next Card");
-        //JButton previousButton = new JButton("Previous Card");
-       // Buttons.add(previousButton);
-        Buttons.add(nextButton);
+        JButton nextButton=new JButton("Next Card");
+        //JButton previousButton=new JButton("Previous Card");
+        JButton Submit=new JButton("Submit");
+        //Buttons.add(previousButton);
+        Buttons.add(Submit);
         Buttons.add(nextButton);
 
-        //cardList=new ArrayList<FlashCard>();
-        //System.out.println("Size of LIst "+cardList.size());
+
+
+        System.out.println("Size of LIst "+cardList.size());
 
         // Add action to Buttons
-        nextButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
+        nextButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {
                 System.out.println("Next Card Pressed");
-                //FlashCard card = new FlashCard(question.getText(), answer.getText());
-                //cardList.add(card);
-                //System.out.println("Size of LIst "+cardList.size());
+                FlashCard card = new FlashCard(counter,question.getText(), answer.getText());
+                cardList.add(card);
+                counter = cardList.size();
+                System.out.println("Size of LIst "+cardList.size());
                 clearCard();
 
 
             }
         });
-       /* previousButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                System.out.println("Previous Card Pressed");
-                editCard();
-
-            }
-        });*/
         Submit.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
             {
                 System.out.println("Submit Pressed");
-                //FlashCard card = new FlashCard(question.getText(), answer.getText());
-                //cardList.add(card);
-               // System.out.println("Size of LIst "+cardList.size());
-                //File();
+                FlashCard card = new FlashCard(counter, question.getText(), answer.getText());
+                cardList.add(card);
+                counter = cardList.size();
+                System.out.println("Final Size of LIst "+cardList.size());
+                File(cardList); // Add list to XML File
                 MainGUI.showMainMenu();
                 frame.dispose();
-
-
             }
         });
+       /* previousButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {
+                System.out.println("Previous Card Pressed");
+                editCard();
+
+            }
+        });*/
         //***********************************************************************************************
         // MenuBar- Code I was playing around with a possibility
-        /*JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
-        JMenuItem newMenuItem = new JMenuItem("New");
+        /*JMenuBar menuBar =new JMenuBar();
+        JMenu fileMenu=new JMenu("File");
+        JMenuItem newMenuItem=new JMenuItem("New");
         JMenuItem saveMenuItem = new JMenuItem("Save");
 
         fileMenu.add(newMenuItem);
@@ -127,15 +134,20 @@ public class FlashCardForm {
 
         menuBar.add(fileMenu);
         // Event Listeners for MenuBar
-        newMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
+        newMenuItem.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {
                 System.out.println("New Menu Pressed");
+
 
 
             }
         });
-        saveMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
+        saveMenuItem.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {
                 System.out.println("Save Menu Pressed");
 
             }
@@ -151,14 +163,14 @@ public class FlashCardForm {
         mainPanel.add(AScroll);
         mainPanel.add(Buttons);
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
-        int height = screenSize.height;
-        int width = screenSize.width;
+        Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
+        int height=screenSize.height;
+        int width=screenSize.width;
 
         // Add to frame
-        frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
-        //frame.add(menuBar, BorderLayout.NORTH);
-        frame.setPreferredSize(new Dimension(width / 2, height / 2));
+        frame.getContentPane().add(BorderLayout.CENTER,mainPanel);
+        // frame.add(menuBar,BorderLayout.NORTH);
+        frame.setPreferredSize(new Dimension(width/2,height/2));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -166,7 +178,7 @@ public class FlashCardForm {
     public static void getOFCQuestions()
     {
         // Class that sends selected Multiple choice form to an array
-        // getQuestions(OMCList);
+        getFlashCards(OFCList);
         FCPlayer();
     }
     private static void FCPlayer()
@@ -176,7 +188,7 @@ public class FlashCardForm {
         Font TextF=new Font("Courier",Font.BOLD,20);
         // Create TextArea to Print Question and Answer
 
-        QuestD.setText("Question Here "+numb);
+        QuestD.setText(OFCList.get(numb).getTerm());
         QuestD.setFont(TextF);
 
 
@@ -195,20 +207,37 @@ public class FlashCardForm {
             public void actionPerformed(ActionEvent event)
             {
                 System.out.println("Show Answer Pressed");
-                if (!pressed)
-                {
+                if(!end) {
+                    if (!pressed) {
 
-                    CAnswer.setText("Next Card");
-                    QuestD.setText("Answer Here "+numb);
-                    pressed=true;
-                    numb=numb+1;
-                    numb2=numb2+1;
+                        CAnswer.setText("Next Card");
+                        QuestD.setText(OFCList.get(numb).getDefinition());
+                        pressed = true;
+                        numb = numb + 1;
+                        numb2 = numb2 + 1;
+                        if (numb2 >= OFCList.size()) {
+
+                            end = true;
+                            pressed=true;
+                            CAnswer.setText("Restart");
+                        }
+
+                    } else {
+                        CAnswer.setText("ShowAnswer");
+                        QuestD.setText(OFCList.get(numb).getTerm());
+                        pressed = false;
+
+                    }
                 }
                 else
                 {
-                    CAnswer.setText("ShowAnswer");
-                    QuestD.setText("Question Here "+numb);
+
+                    numb=0;
+                    numb2=1;
                     pressed=false;
+                    end=false;
+                    getOFCQuestions();
+
                 }
 
             }
@@ -242,36 +271,45 @@ public class FlashCardForm {
         flashCardF.setVisible(true);
 
     }
-
-    private static void clearCard() {
+    private static void clearCard()
+    {
         question.setText("");
         answer.setText("");
         question.requestFocus();
         answer.requestFocus();
     }
-
-    private static void editCard() {
+    private static void editCard()
+    {
 
     }
-
-
-    public static void getFlashCards(Document doc)
+    public static void getFlashCards(ArrayList<FlashCard> List)
     {
-        NodeList flashcardList = doc.getElementsByTagName("QuestionNum");
-        for(int i = 0; i < flashcardList.getLength(); i++)
-        {
-            Node FlashCardNode = flashcardList.item(i);
-            if (FlashCardNode.getNodeType() == Node.ELEMENT_NODE)
-            {
-                Element QuestionElement = (Element) FlashCardNode;
-                String FlashCardId = QuestionElement.getElementsByTagName("num").item(0).getTextContent();
-                String FlashCardTerm = QuestionElement.getElementsByTagName("Question").item(0).getTextContent();
-                String FlashCardDefinition = QuestionElement.getElementsByTagName("Flag").item(0).getTextContent();
-                System.out.println("Question Number = " + FlashCardId);
-                System.out.println("Question = " + FlashCardTerm);
-                System.out.println("Question Flag = " + FlashCardDefinition);
+        try {
+            File FCXML = new File("Flashcard.xml");
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(FCXML);
+            NodeList flashcardList = doc.getElementsByTagName("flashcard");
+            System.out.println("Length=" + flashcardList.getLength());
+            for (int i = 0; i < flashcardList.getLength(); i++) {
+                Node FlashCardNode = flashcardList.item(i);
+                if (FlashCardNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element QuestionElement = (Element) FlashCardNode;
+                    String FlashCardId = QuestionElement.getAttribute("num");
+                    String FlashCardTerm = QuestionElement.getElementsByTagName("term").item(0).getTextContent();
+                    String FlashCardDefinition = QuestionElement.getElementsByTagName("definition").item(0).getTextContent();
+                    FlashCard card = new FlashCard(i, FlashCardTerm, FlashCardDefinition);
+                    List.add(card);
+                    System.out.println("Question Number = " + FlashCardId);
+                    System.out.println("Question = " + FlashCardTerm);
+                    System.out.println("Answer = " + FlashCardDefinition);
 
+                }
             }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Couldn't Save");
         }
     }
 
@@ -295,7 +333,8 @@ public class FlashCardForm {
             for (int i = 0; i < flashcardList.size(); i++) {
                 rootElement.appendChild(createFlashCardElement(doc, Integer.toString(i + 1), flashcardList.get(i).term, flashcardList.get(i).definition));
             }
-
+            NodeList QuestionList = doc.getElementsByTagName("FlashcardSet");
+            System.out.println("Length=" + QuestionList.getLength());
             //for output to file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -305,16 +344,17 @@ public class FlashCardForm {
             DOMSource source = new DOMSource(doc);
 
             //write to console or file
-            StreamResult console = new StreamResult(System.out);
-            StreamResult file = new StreamResult(new File("Flashcard.xml;"));
+            //StreamResult console = new StreamResult(System.out);
+            StreamResult file = new StreamResult(new File("Flashcard.xml"));
 
             //write data
-            transformer.transform(source, console);
+            //transformer.transform(source, console);
             transformer.transform(source, file);
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
-        } catch (TransformerConfigurationException e) {
+        }
+        catch (TransformerConfigurationException e) {
             e.printStackTrace();
         } catch (TransformerException e) {
             e.printStackTrace();
@@ -349,5 +389,5 @@ public class FlashCardForm {
 
     }
 
-}
 
+}
