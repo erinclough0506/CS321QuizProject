@@ -19,6 +19,7 @@ import java.io.*;
 import java.util.*;
 
 // ************************************************************************************************************
+// 1. Add Code for if both RADIO BUTTONS were pressed go to an icon error or find a way so that only one or the other is pressed
 public class QuestionForm {
 
     private static JTextArea questionMC;
@@ -44,6 +45,7 @@ public class QuestionForm {
     static JFrame Test = new JFrame();
 
     static JButton nextQuestion = new JButton("Next Question");
+    static JButton MenuR = new JButton("Return to Main");
     static JPanel Buttons = new JPanel();
     static JPanel Buttons2 = new JPanel();
 
@@ -66,14 +68,11 @@ public class QuestionForm {
         buttons.setLayout(new FlowLayout());
         buttons.add(Multi);
         buttons.add(TF);
-
-        /////////////////////////////////////Action Buttons////////////////////////////////////////////////////////////////
         Multi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("Multiple Choice Selected");
-                createQuestion(); // Sends to createQuestion() function that creates MC menu
-                selector.dispose(); // Removes previous frame
-                // Sends to MC question screen
+                createQuestion();
+                selector.dispose();
 
             }
         });
@@ -81,12 +80,10 @@ public class QuestionForm {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("TrueFalse Selected");
                 True_FalseForm.CreateTrueFalse();
-                selector.dispose(); // Removes previous frame
-                // Sends to true false menu
+                selector.dispose();
 
             }
         });
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height = screenSize.height;
         int width = screenSize.width;
@@ -130,7 +127,7 @@ public class QuestionForm {
         QScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         QScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        /////////////////////////////////// Create Radio Button Action Listener//////////////////////////////////////////
+        // Create Radio Button Action Listener
         aButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 if (aButton.isSelected()) {
@@ -185,12 +182,11 @@ public class QuestionForm {
             }
         });
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         // Create Buttons
         JButton Submit = new JButton("Submit");
         JButton newQuestion = new JButton("Next Question");
-//////////////////////////////////////////Action Buttons////////////////////////////////////////////////////////////
         Submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("Submit Selected");
@@ -202,7 +198,7 @@ public class QuestionForm {
                 //fileSave.showSaveDialog(frame);
                 File();
                 MainGUI.showMainMenu();
-                frame.dispose(); // Disposes original frame
+                frame.dispose();
 
 
             }
@@ -218,7 +214,7 @@ public class QuestionForm {
 
             }
         });
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         // Create Panels
         JPanel Titled = new JPanel();
         Titled.setLayout(new BorderLayout());
@@ -263,7 +259,7 @@ public class QuestionForm {
 
     }
     //***************************************************************************************************************************************
-//************************Create Array to hold prebuilt Questions*******************************************************************
+//************************Create Array to hold prebuilt Questions************************************************************************
     public static void getOMCQuestions()
     {
         // Class that sends selected Multiple choice form to an array
@@ -272,7 +268,7 @@ public class QuestionForm {
         getQuestions(OMCList);
         MCPlayer();
     }
-    //*******************Displays Test for Multiple Choice*********************************************************************************8
+    //*******************Displays Test for Multiple Choice*******************************************************************************
     public static void MCPlayer() {
 
         // Answers Panel
@@ -345,15 +341,21 @@ public class QuestionForm {
         nextQuestion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("Next Question Selected");
-                numb=numb+1;
-                numb2=numb2+1;
+
                 if (!end) {
-                    if (numb2 > OMCList.size()) {
+                    numb=numb+1;
+                    numb2=numb2+1;
+                    questionOMC.setText(OMCList.get(numb).getQuestion());
+                    aButton.setText(OMCList.get(numb).getAnswerA());
+                    bButton.setText(OMCList.get(numb).getAnswerB());
+                    cButton.setText(OMCList.get(numb).getAnswerC());
+                    aButton.setSelected(false);
+                    bButton.setSelected(false);
+                    cButton.setSelected(false);
+                    if (numb2==OMCList.size())
+                    {
                         nextQuestion.setText("Submit Test");
                         end = true;
-                        //Test.dispose();
-                    } else {
-                        MCPlayer();
                     }
                 }
                 else
@@ -363,22 +365,23 @@ public class QuestionForm {
 
             }
         });
-
-
+        MenuR.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                System.out.println("Menu Pressed");
+                MainGUI.showMainMenu();
+            }
+        });
 
         Buttons2.setLayout(new FlowLayout());
-        //Buttons.add(Submit);
         Buttons2.add(nextQuestion);
+        Buttons2.add(MenuR);
 
         // Add Panels to Frame
         AnswersPanel.add(questionOMC);
         questionOMC.setAlignmentX(Component.LEFT_ALIGNMENT);
         AnswersPanel.add(aButton);
-        //aPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         AnswersPanel.add(bButton);
-        //bPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         AnswersPanel.add(cButton);
-        //cPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         AnswersPanel.add(Buttons2);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
@@ -393,23 +396,7 @@ public class QuestionForm {
 
 
     private static void checkAnswer() {
-        questionMC.setText("Enter a Question");
-        questionMC.requestFocus();
-        A.setText("Enter an Answer");
 
-        B.setText("Enter an Answer");
-
-        C.setText("Enter an Answer");
-
-
-
-        aButton.setSelected(false);
-        bButton.setSelected(false);
-        cButton.setSelected(false);
-
-        aTrue = "F";
-        bTrue = "F";
-        cTrue = "F";
 
     }
 
@@ -417,12 +404,8 @@ public class QuestionForm {
         questionMC.setText("Enter a Question");
         questionMC.requestFocus();
         A.setText("Enter an Answer");
-
         B.setText("Enter an Answer");
-
         C.setText("Enter an Answer");
-
-
 
         aButton.setSelected(false);
         bButton.setSelected(false);
@@ -448,7 +431,6 @@ public class QuestionForm {
             for (int i = 0; i < QuestionList.getLength(); i++) {
                 Node QuestionNode = QuestionList.item(i);
                 if (QuestionNode.getNodeType() == Node.ELEMENT_NODE) {
-                    System.out.println("getNode");
                     Element QuestionElement = (Element) QuestionNode;
                     String QuestionId = QuestionElement.getAttribute("Number");
                     System.out.println("Question Number = " + QuestionId);

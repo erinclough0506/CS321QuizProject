@@ -12,7 +12,7 @@ public class MainGUI {
         // Title page with Title and two options to either create a quiz or choose a quiz
         // ***********************************************************************************
         // 1. ADD text to Explain what to do when on menu screen
-        // 2. ADD buttons to other menu to be able to go back to Main Menu
+        // 2. ADD buttons to other menus to be able to go back to Main Menu
 
         // Create Frame
         final JFrame Menu=new JFrame();
@@ -33,12 +33,11 @@ public class MainGUI {
         JButton CreateQ= new JButton("Create Questions");
         Buttons.add(PreSetQ); // Set Button Layout
         Buttons.add(CreateQ);
-        /////////////////////////////////////Action Buttons////////////////////////////////////////////////////////////////
+        // Add Action to the buttons
         PreSetQ.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
             {
-                // Sends to Preset Questions
                 System.out.println("Study Topics Pressed");
                 PickTypeofTest();
                 Menu.dispose();
@@ -49,13 +48,12 @@ public class MainGUI {
         {
             public void actionPerformed(ActionEvent event)
             {
-                // Sends to Preset Questions
                 System.out.println("Create Questions Pressed");
                 showQDesign();
                 Menu.dispose();
             }
         });
-////////////////////////////////////////////////////////////////////////////////////
+
         Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height=screenSize.height;
         int width=screenSize.width;
@@ -98,7 +96,7 @@ public class MainGUI {
             public void actionPerformed(ActionEvent event)
             {
                 System.out.println("FlashCards Pressed");
-                showFlash();
+                FlashCardForm.getOFCQuestions();
                 Tests.dispose();
 
             }
