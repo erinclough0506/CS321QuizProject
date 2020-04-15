@@ -166,8 +166,6 @@ public class FlashCardForm {
     public static void getOFCQuestions()
     {
         // Class that sends selected Multiple choice form to an array
-        // numb=0; // Reinitialize
-        // numb2=1;
         // getQuestions(OMCList);
         FCPlayer();
     }
