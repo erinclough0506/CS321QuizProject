@@ -44,6 +44,8 @@ public class FlashCardForm {
     public static void CreateFlashcard() {
         JPanel mainPanel = new JPanel();
         Font TextF = new Font("Courier", Font.BOLD, 20);
+        final JFrame frame=new JFrame("Flash Card");;
+
         // Text Area Question
         question = new JTextArea(6, 20);
         question.setLineWrap(true);
@@ -70,8 +72,10 @@ public class FlashCardForm {
         JPanel Buttons = new JPanel();
         Buttons.setLayout(new FlowLayout());
         JButton nextButton = new JButton("Next Card");
-        JButton previousButton = new JButton("Previous Card");
-        Buttons.add(previousButton);
+        JButton Submit = new JButton("Next Card");
+        //JButton previousButton = new JButton("Previous Card");
+       // Buttons.add(previousButton);
+        Buttons.add(nextButton);
         Buttons.add(nextButton);
 
         //cardList=new ArrayList<FlashCard>();
@@ -89,16 +93,31 @@ public class FlashCardForm {
 
             }
         });
-        previousButton.addActionListener(new ActionListener() {
+       /* previousButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("Previous Card Pressed");
                 editCard();
 
             }
+        });*/
+        Submit.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {
+                System.out.println("Submit Pressed");
+                //FlashCard card = new FlashCard(question.getText(), answer.getText());
+                //cardList.add(card);
+               // System.out.println("Size of LIst "+cardList.size());
+                //File();
+                MainGUI.showMainMenu();
+                frame.dispose();
+
+
+            }
         });
         //***********************************************************************************************
         // MenuBar- Code I was playing around with a possibility
-        JMenuBar menuBar = new JMenuBar();
+        /*JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         JMenuItem newMenuItem = new JMenuItem("New");
         JMenuItem saveMenuItem = new JMenuItem("Save");
@@ -120,11 +139,10 @@ public class FlashCardForm {
                 System.out.println("Save Menu Pressed");
 
             }
-        });
+        });*/
         //**********************************************************************************************************
         // Create Frame
-        JFrame frame;
-        frame = new JFrame("Flash Card");
+
 
         // Add components to mainPanel
         mainPanel.add(QLabel);
@@ -139,7 +157,7 @@ public class FlashCardForm {
 
         // Add to frame
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
-        frame.add(menuBar, BorderLayout.NORTH);
+        //frame.add(menuBar, BorderLayout.NORTH);
         frame.setPreferredSize(new Dimension(width / 2, height / 2));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
