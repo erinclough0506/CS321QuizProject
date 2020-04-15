@@ -367,6 +367,7 @@ public class QuestionForm {
                     score = score + 1;
                 }
 
+
                 //check score tracker
                 //System.out.println(score);
 
