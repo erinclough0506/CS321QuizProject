@@ -389,10 +389,54 @@ public class QuestionForm {
                 }
                 else
                 {
-                    //where the score needs to be displayed
+                    final JFrame gradeDisplay = new JFrame();
+                    JPanel FinalP = new JPanel();
+                    FinalP.setLayout(new BorderLayout());
+                    JLabel Title = new JLabel("End Of Quiz!");
+                    FinalP.add(Title,BorderLayout.NORTH);
+                    Font TitleF = new Font("Courier", Font.BOLD,60);
+                    Title.setFont(TitleF);
+                    gradeDisplay.add(Title,BorderLayout.NORTH);
+                    JLabel gMessage = new JLabel();
+                    int numberOfQuestions = OMCList.size();
+                    float finalGrade = ((float)score/(float)numberOfQuestions)*100;
+                    gMessage.setText("You got " + score + " out of " + OMCList.size() + " questions correct!"  +" Overall score: "+ finalGrade +"%");
+                    FinalP.add(gMessage,BorderLayout.CENTER);
+                    Font gMessageF = new Font("Courier",Font.PLAIN,40);
+                    gMessage.setFont(gMessageF);
+                    gradeDisplay.add(gMessage,BorderLayout.CENTER);
+                    JPanel Buttons = new JPanel();
+                    Buttons.setLayout( new FlowLayout());
 
-                    //prints final score at end of test
-                    System.out.println("Final score: " + score + "/" + OMCList.size());
+                    JButton Return = new JButton("Return to Main Menu");
+                    Return.setBackground(Color.LIGHT_GRAY);
+                    JButton tryAgain = new JButton("Try Test Again");
+                    tryAgain.setBackground(Color.RED);
+                    Buttons.add(Return);
+                    Buttons.add(tryAgain);
+                    gradeDisplay.add(Buttons,BorderLayout.SOUTH);
+
+
+                    Return.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent actionEvent) {
+                            System.out.println("Return to Main Menu Pressed.");
+                            MainGUI.showMainMenu();
+                            gradeDisplay.dispose();
+                        }
+                    });
+                    tryAgain.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent actionEvent) {
+                            System.out.println("Try Again Selected");
+                           //still not working returns to main menu instead
+                            MainGUI.showMainMenu();
+                            gradeDisplay.dispose();
+
+                        }
+                    });
+                    gradeDisplay.setVisible(true);
+                    FinalP.setVisible(true);
                     Test.dispose();
                 }
             }
