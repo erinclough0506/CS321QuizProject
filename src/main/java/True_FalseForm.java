@@ -102,4 +102,81 @@ public class True_FalseForm {
 // Create True False test method and display
 //--------------------------------------------------------------------------------------------------------------
 
-        }
+    private JFormattedTextField trueFalseFormattedTextField;
+
+    public static void  createTest() {
+
+        JFrame frame = new JFrame();
+
+        //Temporary item, XML information will need to be inserted into the Text File.
+        String item = "THIS IS AN ITEM";
+
+        //Create panel
+        JPanel Top = new JPanel();
+        Top.setLayout(new BorderLayout());
+        JFormattedTextField Output = new JFormattedTextField(item);
+        Top.add(Output,BorderLayout.NORTH);
+
+        //-------------------------------------------------------
+        //creates the Buttons
+        JPanel Buttons = new JPanel();
+        Buttons.setLayout( new FlowLayout());
+        //Set True Button
+        JButton TRUE = new JButton("TRUE");
+        TRUE.setBackground(Color.GREEN);
+
+        //Set False Button
+        JButton FALSE = new JButton("FALSE");
+        FALSE.setBackground(Color.RED);
+        Buttons.add(TRUE);
+        Buttons.add(FALSE);
+
+        //Sets next
+        JRadioButton next = new JRadioButton("next");
+        Buttons.add(next);
+
+
+
+        TRUE.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.out.println("true  pressed");
+            }
+        });
+        //-----------------------------------------------------------
+        FALSE.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.out.println("false  pressed");
+            }
+        });
+
+
+        next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.out.println("next  pressed");
+            }
+        });
+
+
+
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
+        int height = screenSize.height;
+        int width = screenSize.width;
+        frame.setPreferredSize(new Dimension(width / 2, height / 2));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(Top,BorderLayout.NORTH);
+        frame.add(Buttons,BorderLayout.CENTER);
+        frame.pack();
+        Top.setVisible(true);
+        frame.setVisible(true);
+
+    }
+
+
+
+
+
+}
