@@ -1,141 +1,115 @@
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
-import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
-
-import javax.xml.transform.dom.DOMSource;
 
 public class True_False {
-    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
+
+    public static ArrayList<True_FalseTest> TF_List = new ArrayList<True_FalseTest>();
+
+    public static void main(String[] args) {
+        True_FalseTest item = new True_FalseTest(0,"this is a question","true");
+
+        TF_List.add(item);
+        System.out.println("This is the prompt");
 
 
-
-        //----------------------------------------
-        //Temporary driver
-        //----------------------------------------
-
-       // True_False Item = new True_False();
-        Scanner myObj = new Scanner(System.in);
-        System.out.println("Write your question");
-
-        String Question = myObj.nextLine();
-
-
-        System.out.println("Set Whether is is true or false");
-        Scanner myObj2 = new Scanner(System.in);
-        String Flag = myObj2.nextLine();
-
-        System.out.println("The question is " + Question);
-        System.out.println("The Flag is set to  " + Flag);
-
+        TF_file();
+        getQuestionsTF(TF_List);
+    }
 
 //---------------------------------------------------------------------
 
 
+    public static void getQuestionsTF(ArrayList<True_FalseTest> List) {
+        try {
+            File T_F = new File("True_False.xml");
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(T_F);
+            System.out.println("rootElement:" + doc.getDocumentElement().getNodeName());
+            NodeList QuestionList = doc.getElementsByTagName("QuestionNum");
+            System.out.println("Length = " + QuestionList.getLength());
+            for (int i = 0; i < QuestionList.getLength(); i++) {
+                Node QuestionNode = QuestionList.item(i);
+                if (QuestionNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element QuestionElement = (Element) QuestionNode;
+                    String QuestionId = QuestionElement.getAttribute("Number");
+                    System.out.println("Question Number = " + QuestionId);
+                    String QuestionName = QuestionElement.getElementsByTagName("Question").item(0).getTextContent();
+                    System.out.println("Question = " + QuestionName);
+                    String Flag = QuestionElement.getElementsByTagName("Flag_1").item(0).getTextContent();
+                    System.out.println("Answer1 = " + Flag);
 
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder;
-        try{
-            dBuilder = dbFactory.newDocumentBuilder();
+                    True_FalseTest Build = new True_FalseTest(i, QuestionName,Flag);
+                    TF_List.add(Build);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Unable to save");
+        }
+    }
+
+
+    public static void TF_file () {
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.newDocument();
-            // add elements to Document
-            Element rootElement = doc.createElement("User");
-            //append root element to document
+            doc.setXmlStandalone(true);
+            Element rootElement = doc.createElement("Questions");
             doc.appendChild(rootElement);
+            for (int i = 0; i < TF_List.size(); i++) {
+
+                //Set Question number in the id
+                Element NumberElement = doc.createElement("QuestionNum");
+                NumberElement.setAttribute("Number", "" + TF_List.get(i).getNum());
+                rootElement.appendChild(NumberElement);
+                //---------------------------------------------------------------
+                //Set the Question
+                Element QuestionElement = doc.createElement("Question");
+                QuestionElement.setTextContent(TF_List.get(i).getQuestion());
+                NumberElement.appendChild(QuestionElement);
+                //----------------------------------------------------------------
+                //Set Flag1
+                Element Flag_Element1 = doc.createElement("Flag_1");
+                Flag_Element1.setTextContent(TF_List.get(i).getFlag());
+                NumberElement.appendChild(Flag_Element1);
+
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                StreamResult result = new StreamResult(new File("True_False.xml"));
+                DOMSource dom = new DOMSource(doc);
+                transformer.transform(dom, result);
 
 
-            //This shows that input variables can be used to fill out the xml  document.
-            //append first child element to root element
-            rootElement.appendChild(createUserElement(doc, "1","1", Question, Flag));
-
-            //append first child element to root element
-            rootElement.appendChild(createUserElement(doc, "2","2", Question, Flag));
-
-            //for output to file, console
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            //for pp
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            DOMSource source = new DOMSource(doc);
-            //For formatting
-            StreamResult console = new StreamResult(System.out);
-            StreamResult file = new StreamResult(new File("create_user.xml"));
-
-            //Write Data
-            transformer.transform(source, console);
-            transformer.transform(source, file);
-            getQuestion(doc);
+            }
 
 
-        } catch(Exception e)
-
-        {
+        } catch (Exception e) {
 
             e.printStackTrace();
         }
 
+
     }
 
-    //-----------------------------------
-//Creates the elements tags.
-//-----------------------------------
-    private static Node createUserElement(Document doc,String Question_num,String Num,String Question,String Flag)
-    {
-        Element user = doc.createElement("QuestionNum");
-        //set id attribute
-        user.setAttribute("Users",Question_num);
-
-        //set number
-        user.appendChild(createUserElements(doc,user,"num",Num));
-        //create Question
-        user.appendChild(createUserElements(doc,user,"Question",Question));
-        //Create Flag
-        user.appendChild(createUserElements(doc,user,"Flag",Flag));
-
-        return user;
-    }
-//will need to write a utility method to create the text node
-
-
-    // utility method to create text node
-    private static Node createUserElements(Document doc, Element element, String name, String value) {
-        Element node = doc.createElement(name);
-        node.appendChild(doc.createTextNode(value));
-        return node;
-    }
-
-
-    private static void getQuestion(Document doc)
-    {
-        NodeList QuestionList = doc.getElementsByTagName("QuestionNum");
-        for(int i=0; i<QuestionList.getLength(); i++)
-        {
-            Node QuestionNode = QuestionList.item(i);
-            if(QuestionNode.getNodeType() == Node.ELEMENT_NODE)
-            {
-                Element QuestionElement = (Element) QuestionNode;
-                String QuestionId = QuestionElement.getElementsByTagName("num").item(0).getTextContent();
-                String QuestionName = QuestionElement.getElementsByTagName("Question").item(0).getTextContent();
-                String QuestionFlag = QuestionElement.getElementsByTagName("Flag").item(0).getTextContent();
-                System.out.println("Question Number = " + QuestionId);
-                System.out.println("Question = " + QuestionName);
-                System.out.println("Question Flag = " + QuestionFlag);
-
-            }
-        }
-    }
 
 }
 
