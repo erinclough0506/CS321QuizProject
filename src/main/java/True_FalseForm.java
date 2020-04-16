@@ -219,6 +219,7 @@ public class True_FalseForm {
         });
 
 
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height = screenSize.height;
         int width = screenSize.width;
