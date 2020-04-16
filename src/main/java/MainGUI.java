@@ -114,7 +114,7 @@ public class MainGUI {
             public void actionPerformed(ActionEvent event)
             {
                 System.out.println("True False Pressed");
-                True_FalseForm.createTest();
+                True_FalseForm.getTFQuestions();
                 Tests.dispose();
 
             }
