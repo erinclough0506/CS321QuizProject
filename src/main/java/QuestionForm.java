@@ -235,7 +235,7 @@ public class QuestionForm {
         cPanel.add(cButton);
         cPanel.add(C);
 
-
+        ;
         Buttons.setLayout(new FlowLayout());
         Buttons.add(Submit);
         Buttons.add(newQuestion);
@@ -261,29 +261,35 @@ public class QuestionForm {
 
     }
     //***************************************************************************************************************************************
-    //************************Create Array to hold prebuilt Questions************************************************************************
+//************************Create Array to hold prebuilt Questions************************************************************************
     public static void getOMCQuestions()
     {
         // Class that sends selected Multiple choice form to an array
-        numb=0; // Reinitialize
-        numb2=1;
+        numb=0; // walks thru list
+        numb2=1; //always 1 ahead to check if its the last question
+        reset();
         getQuestions(OMCList);
         MCPlayer();
     }
     //*******************Displays Test for Multiple Choice*******************************************************************************
     public static void MCPlayer() {
 
+
+
+
         // Answers Panel
         Container AnswersPanel = Test.getContentPane();
         AnswersPanel.setLayout(new BoxLayout(AnswersPanel, BoxLayout.Y_AXIS));
         // Create Text Boxes
         questionOMC.setText(OMCList.get(numb).getQuestion());
+
         Font TitleF = new Font("Courier", Font.BOLD, 20);
         questionOMC.setFont(TitleF);
 
         aButton.setText(OMCList.get(numb).getAnswerA());
         bButton.setText(OMCList.get(numb).getAnswerB());
         cButton.setText(OMCList.get(numb).getAnswerC());
+
 
         // Create Radio Button Action Listener
         aButton.addActionListener(new ActionListener() {
@@ -343,17 +349,8 @@ public class QuestionForm {
         nextQuestion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("Next Question Selected");
-
-                /*
-                System.out.println(aTrue);
-                System.out.println(OMCList.get(numb).getA());
-                System.out.println(bTrue);
-                System.out.println(OMCList.get(numb).getB());
-                System.out.println(cTrue);
-                System.out.println(OMCList.get(numb).getC());
-                 */
-
                 //checking for correct answer
+
                 if((aTrue.equals("1")) && (aTrue.equals(OMCList.get(numb).getA())))
                 {
                     score = score + 1;
@@ -366,14 +363,11 @@ public class QuestionForm {
                 {
                     score = score + 1;
                 }
-
-
-                //check score tracker
-                //System.out.println(score);
+                numb=numb+1;
+                numb2=numb2+1;
 
                 if (!end) {
-                    numb=numb+1;
-                    numb2=numb2+1;
+
                     questionOMC.setText(OMCList.get(numb).getQuestion());
                     aButton.setText(OMCList.get(numb).getAnswerA());
                     bButton.setText(OMCList.get(numb).getAnswerB());
@@ -389,6 +383,7 @@ public class QuestionForm {
                 }
                 else
                 {
+
                     final JFrame gradeDisplay = new JFrame();
                     JPanel FinalP = new JPanel();
                     FinalP.setLayout(new BorderLayout());
@@ -407,7 +402,7 @@ public class QuestionForm {
                     gradeDisplay.add(gMessage,BorderLayout.CENTER);
                     JPanel Buttons = new JPanel();
                     Buttons.setLayout( new FlowLayout());
-
+                    OMCList.clear();
                     JButton Return = new JButton("Return to Main Menu");
                     Return.setBackground(Color.LIGHT_GRAY);
                     JButton tryAgain = new JButton("Try Test Again");
@@ -415,12 +410,11 @@ public class QuestionForm {
                     Buttons.add(Return);
                     Buttons.add(tryAgain);
                     gradeDisplay.add(Buttons,BorderLayout.SOUTH);
-
-
                     Return.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent actionEvent) {
                             System.out.println("Return to Main Menu Pressed.");
+                            reset();
                             MainGUI.showMainMenu();
                             gradeDisplay.dispose();
                         }
@@ -430,8 +424,11 @@ public class QuestionForm {
                         public void actionPerformed(ActionEvent actionEvent) {
                             System.out.println("Try Again Selected");
                            //still not working returns to main menu instead
-                            MainGUI.showMainMenu();
+                            nextQuestion.setText("Next Question");
+                            reset();
                             gradeDisplay.dispose();
+                            getOMCQuestions();
+
 
                         }
                     });
@@ -471,7 +468,11 @@ public class QuestionForm {
     }
 
 
-    private static void checkAnswer() {
+    private static void reset() {
+        OMCList.clear();
+        //OMCList.listIterator(0);
+        score=0;
+        end=false;
 
 
     }
@@ -497,6 +498,7 @@ public class QuestionForm {
         // Create Frame
 
         try {
+            OMCList.clear();
             File MCXML = new File("Multiple_Choice.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -528,7 +530,9 @@ public class QuestionForm {
                     MultipleChoice Form = new MultipleChoice(i, QuestionName, QuestionResponse1, QuestionResponse2, QuestionResponse3, QuestionFlag1, QuestionFlag2, QuestionFlag3);
                     List.add(Form);
                 }
+
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Couldn't Save");
@@ -536,52 +540,53 @@ public class QuestionForm {
     }
     public static void File() {
         try {
+
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.newDocument();
             doc.setXmlStandalone(true);
             Element rootElement = doc.createElement("Questions");
             doc.appendChild(rootElement);
-            for (MultipleChoice multipleChoice : MCList) {
+            for (int i = 0; i <= MCList.size(); i++) {
 
                 //Set question number in the id section
                 Element NumberElement = doc.createElement("QuestionNum");
-                NumberElement.setAttribute("Number", "" + multipleChoice.getNum());
+                NumberElement.setAttribute("Number", "" + MCList.get(i).getNum());
                 rootElement.appendChild(NumberElement);
                 //---------------------------------------------------------------
                 //Set the Question
                 Element QuestionElement = doc.createElement("Question");
-                QuestionElement.setTextContent(multipleChoice.getQuestion());
+                QuestionElement.setTextContent(MCList.get(i).getQuestion());
                 NumberElement.appendChild(QuestionElement);
                 //----------------------------------------------------------------
                 //Set Response 1
                 Element ResponseElement1 = doc.createElement("Response1");
-                ResponseElement1.setTextContent(multipleChoice.getAnswerA());
+                ResponseElement1.setTextContent(MCList.get(i).getAnswerA());
                 NumberElement.appendChild(ResponseElement1);
                 //----------------------------------------------------------------
                 //Set Flag1
                 Element Flag_Element1 = doc.createElement("Flag_1");
-                Flag_Element1.setTextContent(multipleChoice.getA());
+                Flag_Element1.setTextContent(MCList.get(i).getA());
                 NumberElement.appendChild(Flag_Element1);
                 //-----------------------------------------------------------------
                 //Set Response 2
                 Element Response_Element2 = doc.createElement("Response_2");
-                Response_Element2.setTextContent(multipleChoice.getAnswerB());
+                Response_Element2.setTextContent(MCList.get(i).getAnswerB());
                 NumberElement.appendChild(Response_Element2);
                 //-----------------------------------------------------------------
                 //Set Flag2
                 Element Flag_Element2 = doc.createElement("Flag_2");
-                Flag_Element2.setTextContent(multipleChoice.getB());
+                Flag_Element2.setTextContent(MCList.get(i).getB());
                 NumberElement.appendChild(Flag_Element2);
                 //-----------------------------------------------------------------
                 //Set Response 3
                 Element Response_Element3 = doc.createElement("Response_3");
-                Response_Element3.setTextContent(multipleChoice.getAnswerC());
+                Response_Element3.setTextContent(MCList.get(i).getAnswerC());
                 NumberElement.appendChild(Response_Element3);
                 //-----------------------------------------------------------------
                 //Set Flag3
                 Element Flag_Element3 = doc.createElement("Flag_3");
-                Flag_Element3.setTextContent(multipleChoice.getC());
+                Flag_Element3.setTextContent(MCList.get(i).getC());
                 NumberElement.appendChild(Flag_Element3);
                 //------------------------------------------------------------------
 
@@ -606,5 +611,7 @@ public class QuestionForm {
 
         }
     }
+
+
 
 }
