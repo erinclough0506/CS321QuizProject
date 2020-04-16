@@ -36,9 +36,10 @@ public class FlashCardForm {
     static JScrollPane QScroll=new JScrollPane(QuestD);
     private static int counter=0;
     private static int numb=0;
-    private static int numb2=0;
+    private static int numb2=1;
     private static boolean pressed=false;
     private static boolean end=false;
+    private static boolean restart=false;
     private static ArrayList<FlashCard> cardList=new ArrayList<FlashCard>();
     private static ArrayList<FlashCard> OFCList = new ArrayList<FlashCard>();
 
@@ -113,48 +114,6 @@ public class FlashCardForm {
                 frame.dispose();
             }
         });
-       /* previousButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent event)
-            {
-                System.out.println("Previous Card Pressed");
-                editCard();
-
-            }
-        });*/
-        //***********************************************************************************************
-        // MenuBar- Code I was playing around with a possibility
-        /*JMenuBar menuBar =new JMenuBar();
-        JMenu fileMenu=new JMenu("File");
-        JMenuItem newMenuItem=new JMenuItem("New");
-        JMenuItem saveMenuItem = new JMenuItem("Save");
-
-        fileMenu.add(newMenuItem);
-        fileMenu.add(saveMenuItem);
-
-        menuBar.add(fileMenu);
-        // Event Listeners for MenuBar
-        newMenuItem.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent event)
-            {
-                System.out.println("New Menu Pressed");
-
-
-
-            }
-        });
-        saveMenuItem.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent event)
-            {
-                System.out.println("Save Menu Pressed");
-
-            }
-        });*/
-        //**********************************************************************************************************
-        // Create Frame
-
 
         // Add components to mainPanel
         mainPanel.add(QLabel);
@@ -190,7 +149,7 @@ public class FlashCardForm {
 
         QuestD.setText(OFCList.get(numb).getTerm());
         QuestD.setFont(TextF);
-
+        final int ArrayS= OFCList.size();
 
         // Create Scroll
 
@@ -206,40 +165,47 @@ public class FlashCardForm {
         {
             public void actionPerformed(ActionEvent event)
             {
-                System.out.println("Show Answer Pressed");
-                if(!end) {
+                if (!end) {
                     if (!pressed) {
 
-                        CAnswer.setText("Next Card");
-                        QuestD.setText(OFCList.get(numb).getDefinition());
-                        pressed = true;
-                        numb = numb + 1;
-                        numb2 = numb2 + 1;
-                        if (numb2 >= OFCList.size()) {
-
+                        if (numb2 == ArrayS) {
+                            QuestD.setText(OFCList.get(numb).getDefinition());
+                            numb = 0;
+                            numb2 = 1;
                             end = true;
-                            pressed=true;
                             CAnswer.setText("Restart");
+                            System.out.println("Random");
+                        }  else {
+                            CAnswer.setText("Next Card");
+                            QuestD.setText(OFCList.get(numb).getDefinition());
+                            System.out.println("Show Pressed: Array " + ArrayS + " numb2 " + numb2);
+                            pressed = true;
+                            numb = numb + 1;
+                            numb2 = numb2 + 1;
                         }
 
-                    } else {
-                        CAnswer.setText("ShowAnswer");
+                    }
+                    else {
+
+                        CAnswer.setText("Show Answer");
                         QuestD.setText(OFCList.get(numb).getTerm());
                         pressed = false;
+                        System.out.println("Next Pressed Array " + ArrayS + " numb2 " + numb2);
+
 
                     }
-                }
-                else
-                {
+                } else {
 
-                    numb=0;
-                    numb2=1;
-                    pressed=false;
+                    numb = 0;
+                    numb2 = 1;
+                    pressed = false;
                     end=false;
-                    getOFCQuestions();
+                    CAnswer.setText("Show Answer");
+                    QuestD.setText(OFCList.get(numb).getTerm());
+                    System.out.println("end==true");
+
 
                 }
-
             }
         });
         Main.addActionListener(new ActionListener()
