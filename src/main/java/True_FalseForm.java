@@ -256,17 +256,6 @@ public class True_FalseForm {
                 }
 
 
-
-               /* if((aTrue.equals("1")) && (aTrue.equals(OTF_List.get(numb).getFlag()))) {
-                    scoreT = scoreT + 1;
-                }
-                else if ((bTrue.equals("0")) && (bTrue.equals(OTF_List.get(numb).getFlag())))
-                {
-                    scoreT = scoreT + 1;
-                }
-                System.out.println(scoreT);
-        */
-//--------------------------------------------------------------------------------------------------
                 if (!end) {
                     numb = numb + 1;
                     numb2 = numb2 + 1;
@@ -286,10 +275,6 @@ public class True_FalseForm {
                 {
 //---------------------------------------------------------------------------------------------------------------------------------------
 //Testing space
-
-
-
-
                     final JFrame gradeDisplay = new JFrame();
                     JPanel FinalP = new JPanel();
                     FinalP.setLayout(new BorderLayout());
@@ -301,9 +286,9 @@ public class True_FalseForm {
                     JLabel gMessage = new JLabel();
                     int numberOfQuestions = OTF_List.size();
                     float finalGrade = ((float)scoreT/(float)numberOfQuestions)*100;
-                    gMessage.setText("You got " + scoreT + " out of " + OTF_List.size() + " questions correct!"  +" Overall score: "+ finalGrade +"%");
+                    gMessage.setText("You got " + scoreT + " out of " + OTF_List.size() + " questions correct!"+" Overall score: "+ finalGrade +"%");
                     FinalP.add(gMessage,BorderLayout.CENTER);
-                    Font gMessageF = new Font("Courier",Font.PLAIN,40);
+                    Font gMessageF = new Font("Courier",Font.PLAIN,20);
                     gMessage.setFont(gMessageF);
                     gradeDisplay.add(gMessage,BorderLayout.CENTER);
                     JPanel Buttons = new JPanel();
@@ -316,10 +301,14 @@ public class True_FalseForm {
                     Buttons.add(Return);
                     Buttons.add(tryAgain);
                     gradeDisplay.add(Buttons,BorderLayout.SOUTH);
-
-
+                    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
+                    int height = screenSize.height;
+                    int width = screenSize.width;
+                    gradeDisplay.setPreferredSize(new Dimension(width / 2, height / 2));
                     gradeDisplay.setVisible(true);
                     FinalP.setVisible(true);
+                    gradeDisplay.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    gradeDisplay.pack();
 
 //-------------------------------------------------------------------------------------------------------------------------------------------
                 }
