@@ -235,7 +235,7 @@ public class QuestionForm {
         cPanel.add(cButton);
         cPanel.add(C);
 
-        ;
+
         Buttons.setLayout(new FlowLayout());
         Buttons.add(Submit);
         Buttons.add(newQuestion);
@@ -261,7 +261,7 @@ public class QuestionForm {
 
     }
     //***************************************************************************************************************************************
-//************************Create Array to hold prebuilt Questions************************************************************************
+    //************************Create Array to hold prebuilt Questions************************************************************************
     public static void getOMCQuestions()
     {
         // Class that sends selected Multiple choice form to an array
@@ -542,46 +542,46 @@ public class QuestionForm {
             doc.setXmlStandalone(true);
             Element rootElement = doc.createElement("Questions");
             doc.appendChild(rootElement);
-            for (int i = 0; i < MCList.size(); i++) {
+            for (MultipleChoice multipleChoice : MCList) {
 
                 //Set question number in the id section
                 Element NumberElement = doc.createElement("QuestionNum");
-                NumberElement.setAttribute("Number", "" + MCList.get(i).getNum());
+                NumberElement.setAttribute("Number", "" + multipleChoice.getNum());
                 rootElement.appendChild(NumberElement);
                 //---------------------------------------------------------------
                 //Set the Question
                 Element QuestionElement = doc.createElement("Question");
-                QuestionElement.setTextContent(MCList.get(i).getQuestion());
+                QuestionElement.setTextContent(multipleChoice.getQuestion());
                 NumberElement.appendChild(QuestionElement);
                 //----------------------------------------------------------------
                 //Set Response 1
                 Element ResponseElement1 = doc.createElement("Response1");
-                ResponseElement1.setTextContent(MCList.get(i).getAnswerA());
+                ResponseElement1.setTextContent(multipleChoice.getAnswerA());
                 NumberElement.appendChild(ResponseElement1);
                 //----------------------------------------------------------------
                 //Set Flag1
                 Element Flag_Element1 = doc.createElement("Flag_1");
-                Flag_Element1.setTextContent(MCList.get(i).getA());
+                Flag_Element1.setTextContent(multipleChoice.getA());
                 NumberElement.appendChild(Flag_Element1);
                 //-----------------------------------------------------------------
                 //Set Response 2
                 Element Response_Element2 = doc.createElement("Response_2");
-                Response_Element2.setTextContent(MCList.get(i).getAnswerB());
+                Response_Element2.setTextContent(multipleChoice.getAnswerB());
                 NumberElement.appendChild(Response_Element2);
                 //-----------------------------------------------------------------
                 //Set Flag2
                 Element Flag_Element2 = doc.createElement("Flag_2");
-                Flag_Element2.setTextContent(MCList.get(i).getB());
+                Flag_Element2.setTextContent(multipleChoice.getB());
                 NumberElement.appendChild(Flag_Element2);
                 //-----------------------------------------------------------------
                 //Set Response 3
                 Element Response_Element3 = doc.createElement("Response_3");
-                Response_Element3.setTextContent(MCList.get(i).getAnswerC());
+                Response_Element3.setTextContent(multipleChoice.getAnswerC());
                 NumberElement.appendChild(Response_Element3);
                 //-----------------------------------------------------------------
                 //Set Flag3
                 Element Flag_Element3 = doc.createElement("Flag_3");
-                Flag_Element3.setTextContent(MCList.get(i).getC());
+                Flag_Element3.setTextContent(multipleChoice.getC());
                 NumberElement.appendChild(Flag_Element3);
                 //------------------------------------------------------------------
 

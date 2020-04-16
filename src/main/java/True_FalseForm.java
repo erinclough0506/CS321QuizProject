@@ -30,6 +30,11 @@ public class True_FalseForm {
     private static boolean end= false;
     public static ArrayList<True_False> TF_List = new ArrayList<True_False>();
     public static ArrayList<True_False> OTF_List = new ArrayList<True_False>();
+    static int scoreT=0;
+    static String  aTrue = "0";
+    static String  bTrue = "0";
+
+
 
     public static void CreateTrueFalse() { // Make a TRUE_false form class
         // Create Frame
@@ -76,7 +81,8 @@ public class True_FalseForm {
         T.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("True Selected");
-                T_F="T";
+                T_F="1";
+
                 F.setSelected(false);
 
             }
@@ -84,7 +90,7 @@ public class True_FalseForm {
         F.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("False Selected");
-                T_F="F";
+                T_F="0";
                 T.setSelected(false);
 
             }
@@ -141,6 +147,8 @@ public class True_FalseForm {
     public static void getTFQuestions()
     {
         // Class that sends selected Multiple choice form to an array
+        numb =0;
+        numb2=1;
         getQuestionsTF(OTF_List);
         createTest();
     }
@@ -174,23 +182,50 @@ public class True_FalseForm {
         final JButton next = new JButton("Next");
         Buttons.add(next);
 
+//-------------------------------------
+
+      //  TRUE.setText(OTF_List.get(numb).getFlag());
+      //  FALSE.setText(OTF_List.get(numb).getFlag());
+//--------------------------------------
+
 
         TRUE.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("true selected");
-                FALSE.setSelected(false);
-                True_FALSE="T";
+               if(TRUE.isSelected()) {
+                   System.out.println("true selected");
+                   FALSE.setSelected(false);
+                   True_FALSE = "True";
+                   aTrue = "1";
+                   bTrue = "3";
+
+               }
+           else {
+                    System.out.println("True is not selected");
+                    aTrue = "0";
+            }
+
             }
         });
         //-----------------------------------------------------------
         FALSE.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("false selected");
-                TRUE.setSelected(false);
-                True_FALSE="F";
-            }
+
+               if(FALSE.isSelected()) {
+
+                   System.out.println("false selected");
+                   TRUE.setSelected(false);
+                   True_FALSE = "False";
+                   aTrue = "3";
+                   bTrue = "0";
+               }
+               else{
+                   System.out.println("False no selected");
+                   bTrue = "1";
+
+               }
+               }
         });
 
 
@@ -198,24 +233,99 @@ public class True_FalseForm {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println("next  pressed");
+//------------------------------------------------------------------------------------------------
+//TEST CODE
+
+                String tNew = null;
+                String fNew = null;
+
+                System.out.print("This is True- " + aTrue);
+                System.out.print("This is False-" + bTrue);
+                System.out.println("inside list- "+ OTF_List.get(numb).getFlag());
+                tNew = OTF_List.get(numb).getFlag();
+                fNew = OTF_List.get(numb).getFlag();
+
+                System.out.println(tNew);
+               // System.out.println(fNew);
+
+                if (aTrue.equals(tNew)){
+                    scoreT = scoreT+1;
+                }
+                else if(bTrue.equals(tNew)){
+                    scoreT = scoreT+1;
+                }
+
+
+
+               /* if((aTrue.equals("1")) && (aTrue.equals(OTF_List.get(numb).getFlag()))) {
+                    scoreT = scoreT + 1;
+                }
+                else if ((bTrue.equals("0")) && (bTrue.equals(OTF_List.get(numb).getFlag())))
+                {
+                    scoreT = scoreT + 1;
+                }
+                System.out.println(scoreT);
+        */
+//--------------------------------------------------------------------------------------------------
                 if (!end) {
+                    numb = numb + 1;
+                    numb2 = numb2 + 1;
                     TRUE.setSelected(false);
                     FALSE.setSelected(false);
                     True_FALSE = "NA"; //// Answer neither True or False
-                    numb = numb + 1;
-                    numb2 = numb2 + 1;
+
                     Output.setText(OTF_List.get(numb).getQuestion());
                     if (numb2>=OTF_List.size())
                     {
                         next.setText("Submit Test");
                         end = true;
+
                     }
                 }
                 else
                 {
+//---------------------------------------------------------------------------------------------------------------------------------------
+//Testing space
 
+
+
+
+                    final JFrame gradeDisplay = new JFrame();
+                    JPanel FinalP = new JPanel();
+                    FinalP.setLayout(new BorderLayout());
+                    JLabel Title = new JLabel("End Of Quiz!");
+                    FinalP.add(Title,BorderLayout.NORTH);
+                    Font TitleF = new Font("Courier", Font.BOLD,60);
+                    Title.setFont(TitleF);
+                    gradeDisplay.add(Title,BorderLayout.NORTH);
+                    JLabel gMessage = new JLabel();
+                    int numberOfQuestions = OTF_List.size();
+                    float finalGrade = ((float)scoreT/(float)numberOfQuestions)*100;
+                    gMessage.setText("You got " + scoreT + " out of " + OTF_List.size() + " questions correct!"  +" Overall score: "+ finalGrade +"%");
+                    FinalP.add(gMessage,BorderLayout.CENTER);
+                    Font gMessageF = new Font("Courier",Font.PLAIN,40);
+                    gMessage.setFont(gMessageF);
+                    gradeDisplay.add(gMessage,BorderLayout.CENTER);
+                    JPanel Buttons = new JPanel();
+                    Buttons.setLayout( new FlowLayout());
+
+                    JButton Return = new JButton("Return to Main Menu");
+                    Return.setBackground(Color.LIGHT_GRAY);
+                    JButton tryAgain = new JButton("Try Test Again");
+                    tryAgain.setBackground(Color.RED);
+                    Buttons.add(Return);
+                    Buttons.add(tryAgain);
+                    gradeDisplay.add(Buttons,BorderLayout.SOUTH);
+
+
+                    gradeDisplay.setVisible(true);
+                    FinalP.setVisible(true);
+
+//-------------------------------------------------------------------------------------------------------------------------------------------
                 }
+
             }
+
         });
 
 
@@ -230,6 +340,8 @@ public class True_FalseForm {
         frame.pack();
         Top.setVisible(true);
         frame.setVisible(true);
+
+
 
     }
 
