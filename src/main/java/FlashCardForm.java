@@ -114,48 +114,6 @@ public class FlashCardForm {
                 frame.dispose();
             }
         });
-       /* previousButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent event)
-            {
-                System.out.println("Previous Card Pressed");
-                editCard();
-
-            }
-        });*/
-        //***********************************************************************************************
-        // MenuBar- Code I was playing around with a possibility
-        /*JMenuBar menuBar =new JMenuBar();
-        JMenu fileMenu=new JMenu("File");
-        JMenuItem newMenuItem=new JMenuItem("New");
-        JMenuItem saveMenuItem = new JMenuItem("Save");
-
-        fileMenu.add(newMenuItem);
-        fileMenu.add(saveMenuItem);
-
-        menuBar.add(fileMenu);
-        // Event Listeners for MenuBar
-        newMenuItem.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent event)
-            {
-                System.out.println("New Menu Pressed");
-
-
-
-            }
-        });
-        saveMenuItem.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent event)
-            {
-                System.out.println("Save Menu Pressed");
-
-            }
-        });*/
-        //**********************************************************************************************************
-        // Create Frame
-
 
         // Add components to mainPanel
         mainPanel.add(QLabel);
