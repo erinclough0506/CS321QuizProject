@@ -183,17 +183,12 @@ public class True_FalseForm {
         final JButton next = new JButton("Next");
         Buttons.add(next);
 
-//-------------------------------------
-
-        //  TRUE.setText(OTF_List.get(numb).getFlag());
-        //  FALSE.setText(OTF_List.get(numb).getFlag());
-//--------------------------------------
-
-
+        // Action Listener for buttons
         TRUE.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if(TRUE.isSelected()) {
+                    // Radio Button is set to true
                     System.out.println("true selected");
                     FALSE.setSelected(false);
                     True_FALSE = "True";
@@ -214,7 +209,7 @@ public class True_FalseForm {
             public void actionPerformed(ActionEvent actionEvent) {
 
                 if(FALSE.isSelected()) {
-
+                    // Radio False button set to true
                     System.out.println("false selected");
                     TRUE.setSelected(false);
                     True_FALSE = "False";
@@ -229,13 +224,11 @@ public class True_FalseForm {
             }
         });
 
-
+// shifts through each question and last question prompts the reader to submit the test for score
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println("next  pressed");
-//------------------------------------------------------------------------------------------------
-//TEST CODE
 
                 String tNew = null;
                 String fNew = null;
@@ -274,6 +267,7 @@ public class True_FalseForm {
                 }
                 else
                 {
+                    // When test is over prints the result of test
                     printResult();
                     frame.dispose();
                 }
@@ -298,6 +292,7 @@ public class True_FalseForm {
 
     public static void getQuestionsTF(ArrayList<True_False> List) {
         try {
+            // Gets xml formated questions to display for user
             File T_F = new File("True_False.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -327,6 +322,7 @@ public class True_FalseForm {
     }
     public static void TF_file () {
         try {
+            // Writes user input test questions to an xml file
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.newDocument();
@@ -399,11 +395,13 @@ public class True_FalseForm {
         // Button ActionListener
         Return.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
+                // If returning to main reset variables and array
                 numb=0;
                 numb2=1;
                 end=false;
                 MainGUI.showMainMenu();
                 gradeDisplay.dispose();
+                OTF_List.clear();
             }
         });
         // Add Buttons to Button Panel
@@ -418,6 +416,7 @@ public class True_FalseForm {
         // Add Panels to Frame gradeDisplay
         gradeDisplay.add(FinalP,BorderLayout.NORTH);
         gradeDisplay.add(Buttons,BorderLayout.CENTER);
+        // Code to display
         gradeDisplay.setPreferredSize(new Dimension(width / 2, height / 2));
         gradeDisplay.setVisible(true);
         gradeDisplay.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
