@@ -7,6 +7,9 @@ import java.awt.event.*;
 import java.awt.geom.*;
 import javax.swing.*;
 public class MainGUI {
+    static File TF= new File("True_False.xml");
+    static File MC= new File("Multiple_Choice.xml");
+    static File FC=new File("Flashcard.xml");
     public static void showMainMenu()
     {
         // Title page with Title and two options to either create a quiz or choose a quiz
@@ -93,29 +96,53 @@ public class MainGUI {
         FlashCards.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
-            {
-                System.out.println("FlashCards Pressed");
-                FlashCardForm.getOFCQuestions();
-                Tests.dispose();
+            { // Checks to see if FlashCard xml file exists
+                if(FC.exists()) {
+                    System.out.println("FlashCards exists");
+                    FlashCardForm.getOFCQuestions();
+                    Tests.dispose();
+                }
+                else
+                {
+                    System.out.println("FlashCards DNE");
+                    showError();
+                    Tests.dispose();
+                }
 
             }
         });
         MultiChoice.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
-            {
-                System.out.println("MultiChoice Pressed");
-                QuestionForm.getOMCQuestions();
-                Tests.dispose();
+            {// Checks to see if MultiChoice xml file exists
+                if (MC.exists()) {
+                    System.out.println("MultiChoice Pressed");
+                    QuestionForm.getOMCQuestions();
+                    Tests.dispose();
+                }
+                else
+                {
+                    System.out.println("FlashCards DNE");
+                    showError();
+                    Tests.dispose();
+                }
             }
         });
         True_F.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent event)
-            {
-                System.out.println("True False Pressed");
-                True_FalseForm.getTFQuestions();
-                Tests.dispose();
+            {// Checks to see if True_False xml file exists
+                if (TF.exists()) {
+                    System.out.println("True False Pressed");
+                    True_FalseForm.getTFQuestions();
+                    Tests.dispose();
+                }
+                else
+                {
+                    System.out.println("FlashCards DNE");
+                    showError();
+                    Tests.dispose();
+                }
 
             }
         });
@@ -137,19 +164,7 @@ public class MainGUI {
         Tests.pack();
         Tests.setVisible(true);  // Choose from 3 different choices
     }
-    public static void showFlash()
-    {
-        // Pick Type of Flash Card
-    }
-    public static void showMulti()
-    {
-        System.out.println("Show Multi");
 
-    }
-    public static void showT_F()
-    {
-        // Pick type of True False
-    }
     public static void showQDesign()
     {
         // Create a Frame
@@ -211,12 +226,39 @@ public class MainGUI {
         Tests.pack();
         Tests.setVisible(true);
     }
-    public static void showTest()
+    public static void showError()
     {
-        // Pick type of Test
-    }
-    public static void DisplayResult()
-    {
-        // Displays Result of Test
+        // Create Frame
+        final JFrame frame =new JFrame();
+        frame.setLayout(new BorderLayout());
+        JLabel label=new JLabel("Error: Create Questions first");
+        Font TitleF=new Font("Courier",Font.BOLD,20);
+        label.setFont(TitleF);
+        // Create Panel
+        final JPanel buttons=new JPanel(new FlowLayout());
+        // Create Buttons
+        JButton Main=new JButton ("Return to Main");
+        Main.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {
+                showMainMenu();
+                frame.dispose();
+            }
+        });
+        // Add Components to Panels
+        buttons.add(Main);
+        Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
+        int height=screenSize.height;
+        int width=screenSize.width;
+
+        // Add Components to Frame
+        frame.add(label, BorderLayout.NORTH);
+        frame.add(buttons,BorderLayout.CENTER);
+        frame.setPreferredSize(new Dimension(width/2,height/2));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+
     }
 }
