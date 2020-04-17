@@ -414,6 +414,7 @@ public class QuestionForm {
                         @Override
                         public void actionPerformed(ActionEvent actionEvent) {
                             System.out.println("Return to Main Menu Pressed.");
+                            OMCList.clear();
                             MainGUI.showMainMenu();
                             gradeDisplay.dispose();
                         }
