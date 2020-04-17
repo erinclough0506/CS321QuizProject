@@ -271,6 +271,7 @@ public class True_FalseForm {
                 else
                 {
                     // When test is over prints the result of test
+                    OTF_List.clear();
                     printResult();
                     frame.dispose();
                 }
