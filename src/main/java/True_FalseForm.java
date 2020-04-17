@@ -110,11 +110,14 @@ public class True_FalseForm {
         });
         Submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
+                // If user is ready to submit test
                 System.out.println("Submit Pressed");
+                // Adds Last question to test
                 True_False Form = new True_False(counter, question.getText(), T_F);
                 TF_List.add(Form);
                 counter = TF_List.size();
-                TF_file ();
+                TF_file (); // Sends questions to file
+                TF_List.clear(); // Clears array
                 MainGUI.showMainMenu();
                 frame.dispose();
 

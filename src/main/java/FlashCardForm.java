@@ -39,7 +39,6 @@ public class FlashCardForm {
     private static int numb2=1;
     private static boolean pressed=false;
     private static boolean end=false;
-    private static boolean restart=false;
     private static ArrayList<FlashCard> cardList=new ArrayList<FlashCard>();
     private static ArrayList<FlashCard> OFCList = new ArrayList<FlashCard>();
 
@@ -110,6 +109,7 @@ public class FlashCardForm {
                 counter = cardList.size();
                 System.out.println("Final Size of LIst "+cardList.size());
                 File(cardList); // Add list to XML File
+                cardList.clear(); // clears array
                 MainGUI.showMainMenu();
                 frame.dispose();
             }

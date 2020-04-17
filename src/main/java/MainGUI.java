@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.awt.geom.*;
 import javax.swing.*;
 public class MainGUI {
+    // Initializes Files used for testing
     static File TF= new File("True_False.xml");
     static File MC= new File("Multiple_Choice.xml");
     static File FC=new File("Flashcard.xml");
@@ -23,7 +24,7 @@ public class MainGUI {
         // Create Title Panel
         JPanel TitleP= new JPanel();              // Create Menu Panel
         TitleP.setLayout(new BorderLayout());     // Define Layout
-
+        // Create Label
         JLabel Title=new JLabel("Quiz Program"); // Set Title
         TitleP.add(Title,BorderLayout.NORTH);      // Define Title Layout
         Font TitleF=new Font("Courier",Font.BOLD,60);
@@ -34,21 +35,24 @@ public class MainGUI {
         Buttons.setLayout(new FlowLayout());                 // Define Button Layout
         JButton PreSetQ= new JButton("Study Options");
         JButton CreateQ= new JButton("Create Questions");
+        // Add Buttons to button panel
         Buttons.add(PreSetQ); // Set Button Layout
         Buttons.add(CreateQ);
         // Add Action to the buttons
         PreSetQ.addActionListener(new ActionListener()
         {
+            // If Test from preset questions was pressed
             public void actionPerformed(ActionEvent event)
             {
                 System.out.println("Study Topics Pressed");
-                PickTypeofTest();
+                PickTypeofTest(); //
                 Menu.dispose();
 
             }
         });
         CreateQ.addActionListener(new ActionListener()
         {
+            // If Create questions was pressed
             public void actionPerformed(ActionEvent event)
             {
                 System.out.println("Create Questions Pressed");
@@ -61,10 +65,10 @@ public class MainGUI {
         int height=screenSize.height;
         int width=screenSize.width;
 
-        //Menu.setState(Frame.NORMAL);
+        // Adds components to frame
         Menu.add(Title, BorderLayout.NORTH);
         Menu.add(Buttons,BorderLayout.CENTER);
-        //Menu.setLocationRelativeTo(null);
+        // Sets Size of screen
         Menu.setPreferredSize(new Dimension(width/2,height/2));
         Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Menu.pack();

@@ -40,7 +40,6 @@ public class QuestionForm {
     static boolean end=false;
     static int numb=0;
     static int numb2=1;
-    static int correct=0;
 
     static JFrame Test = new JFrame();
 
@@ -70,6 +69,7 @@ public class QuestionForm {
         buttons.setLayout(new FlowLayout());
         buttons.add(Multi);
         buttons.add(TF);
+        // Action Listener for buttons
         Multi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("Multiple Choice Selected");
@@ -189,17 +189,18 @@ public class QuestionForm {
         // Create Buttons
         JButton Submit = new JButton("Submit");
         JButton newQuestion = new JButton("Next Question");
+        // Action Listener for Buttons
         Submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("Submit Selected");
+                // Saves last question
                 MultipleChoice Form = new MultipleChoice(counter, questionMC.getText(), A.getText(), B.getText(), C.getText(), aTrue, bTrue, cTrue);
                 MCList.add(Form);
                 counter = MCList.size();
-                //JFileChooser fileSave = new JFileChooser();
                 System.out.println("Size of Final ArrayList " + MCList.size());
-                //fileSave.showSaveDialog(frame);
-                File();
-                MainGUI.showMainMenu();
+                File(); // Saves questions from array to xml folder
+                MCList.clear(); // Clears array
+                MainGUI.showMainMenu(); // returns to main menu
                 frame.dispose();
 
 
@@ -208,6 +209,7 @@ public class QuestionForm {
         newQuestion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("Next Question Selected");
+                // Saves question and answers to array
                 MultipleChoice Form = new MultipleChoice(counter, questionMC.getText(), A.getText(), B.getText(), C.getText(), aTrue, bTrue, cTrue);
                 MCList.add(Form);
                 counter = MCList.size();
@@ -235,7 +237,7 @@ public class QuestionForm {
         cPanel.add(cButton);
         cPanel.add(C);
 
-
+        // Add Buttons to Button Panel
         Buttons.setLayout(new FlowLayout());
         Buttons.add(Submit);
         Buttons.add(newQuestion);
@@ -344,15 +346,6 @@ public class QuestionForm {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("Next Question Selected");
 
-                /*
-                System.out.println(aTrue);
-                System.out.println(OMCList.get(numb).getA());
-                System.out.println(bTrue);
-                System.out.println(OMCList.get(numb).getB());
-                System.out.println(cTrue);
-                System.out.println(OMCList.get(numb).getC());
-                 */
-
                 //checking for correct answer
                 if((aTrue.equals("1")) && (aTrue.equals(OMCList.get(numb).getA())))
                 {
@@ -368,12 +361,10 @@ public class QuestionForm {
                 }
 
 
-                //check score tracker
-                //System.out.println(score);
-
                 if (!end) {
                     numb=numb+1;
-                    numb2=numb2+1;
+                    numb2=numb2+1; // Counter to iterate through questions and answers
+                    // Outputs Test for user to read
                     questionOMC.setText(OMCList.get(numb).getQuestion());
                     aButton.setText(OMCList.get(numb).getAnswerA());
                     bButton.setText(OMCList.get(numb).getAnswerB());
@@ -383,12 +374,14 @@ public class QuestionForm {
                     cButton.setSelected(false);
                     if (numb2==OMCList.size())
                     {
+                        // If end of test has been reached
                         nextQuestion.setText("Submit Test");
                         end = true;
                     }
                 }
                 else
                 {
+                    // If test has ended Show score
                     final JFrame gradeDisplay = new JFrame();
                     JPanel FinalP = new JPanel();
                     FinalP.setLayout(new BorderLayout());
@@ -402,7 +395,7 @@ public class QuestionForm {
                     float finalGrade = ((float)score/(float)numberOfQuestions)*100;
                     gMessage.setText("You got " + score + " out of " + OMCList.size() + " questions correct!"  +" Overall score: "+ finalGrade +"%");
                     FinalP.add(gMessage,BorderLayout.CENTER);
-                    Font gMessageF = new Font("Courier",Font.PLAIN,40);
+                    Font gMessageF = new Font("Courier",Font.PLAIN,20); // Set Grade Output Font
                     gMessage.setFont(gMessageF);
                     gradeDisplay.add(gMessage,BorderLayout.CENTER);
                     JPanel Buttons = new JPanel();
@@ -435,8 +428,15 @@ public class QuestionForm {
 
                         }
                     });
+                    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
+                    int height = screenSize.height;
+                    int width = screenSize.width;
+                    // Output Grade Display to a set size
                     gradeDisplay.setVisible(true);
+                    gradeDisplay.setPreferredSize(new Dimension(width / 2, height / 2));
                     FinalP.setVisible(true);
+                    gradeDisplay.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    gradeDisplay.pack();
                     Test.dispose();
                 }
             }
@@ -444,6 +444,7 @@ public class QuestionForm {
         MenuR.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("Menu Pressed");
+                OMCList.clear(); // Clear Array List
                 MainGUI.showMainMenu();
             }
         });
