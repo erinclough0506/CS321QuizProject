@@ -57,7 +57,6 @@ public class True_FalseForm {
         question.setWrapStyleWord(true);
         question.setFont(TitleF);
 
-
         // Add Scroll
         JScrollPane QScroll = new JScrollPane(question);
         QScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -77,7 +76,7 @@ public class True_FalseForm {
         JButton Submit = new JButton("Submit");
         NextButtons.add(Submit);
         NextButtons.add(newQuestion);
-
+        // Button Action Listener
         T.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("True Selected");
@@ -101,6 +100,8 @@ public class True_FalseForm {
                 True_False Form = new True_False(counter, question.getText(), T_F);
                 TF_List.add(Form);
                 counter = TF_List.size();
+                T.setSelected(false);
+                F.setSelected(false);
                 clearPage();
 
 
@@ -109,11 +110,14 @@ public class True_FalseForm {
         });
         Submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
+                // If user is ready to submit test
                 System.out.println("Submit Pressed");
+                // Adds Last question to test
                 True_False Form = new True_False(counter, question.getText(), T_F);
                 TF_List.add(Form);
                 counter = TF_List.size();
-                TF_file ();
+                TF_file (); // Sends questions to file
+                TF_List.clear(); // Clears array
                 MainGUI.showMainMenu();
                 frame.dispose();
 
@@ -154,7 +158,7 @@ public class True_FalseForm {
     }
     public static void createTest() {
 
-        JFrame frame = new JFrame();
+        final JFrame frame = new JFrame();
 
         //Temporary item, XML information will need to be inserted into the Text File.
 
@@ -166,7 +170,7 @@ public class True_FalseForm {
 
         //-------------------------------------------------------
         //creates the Buttons
-        JPanel Buttons = new JPanel();
+        final JPanel Buttons = new JPanel();
         Buttons.setLayout(new FlowLayout());
         //Set True Button
         final JRadioButton TRUE = new JRadioButton("TRUE");
@@ -182,28 +186,23 @@ public class True_FalseForm {
         final JButton next = new JButton("Next");
         Buttons.add(next);
 
-//-------------------------------------
-
-      //  TRUE.setText(OTF_List.get(numb).getFlag());
-      //  FALSE.setText(OTF_List.get(numb).getFlag());
-//--------------------------------------
-
-
+        // Action Listener for buttons
         TRUE.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-               if(TRUE.isSelected()) {
-                   System.out.println("true selected");
-                   FALSE.setSelected(false);
-                   True_FALSE = "True";
-                   aTrue = "1";
-                   bTrue = "3";
+                if(TRUE.isSelected()) {
+                    // Radio Button is set to true
+                    System.out.println("true selected");
+                    FALSE.setSelected(false);
+                    True_FALSE = "True";
+                    aTrue = "1";
+                    bTrue = "3";
 
-               }
-           else {
+                }
+                else {
                     System.out.println("True is not selected");
                     aTrue = "0";
-            }
+                }
 
             }
         });
@@ -212,29 +211,27 @@ public class True_FalseForm {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
-               if(FALSE.isSelected()) {
+                if(FALSE.isSelected()) {
+                    // Radio False button set to true
+                    System.out.println("false selected");
+                    TRUE.setSelected(false);
+                    True_FALSE = "False";
+                    aTrue = "3";
+                    bTrue = "0";
+                }
+                else{
+                    System.out.println("False no selected");
+                    bTrue = "1";
 
-                   System.out.println("false selected");
-                   TRUE.setSelected(false);
-                   True_FALSE = "False";
-                   aTrue = "3";
-                   bTrue = "0";
-               }
-               else{
-                   System.out.println("False no selected");
-                   bTrue = "1";
-
-               }
-               }
+                }
+            }
         });
 
-
+// shifts through each question and last question prompts the reader to submit the test for score
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println("next  pressed");
-//------------------------------------------------------------------------------------------------
-//TEST CODE
 
                 String tNew = null;
                 String fNew = null;
@@ -246,7 +243,7 @@ public class True_FalseForm {
                 fNew = OTF_List.get(numb).getFlag();
 
                 System.out.println(tNew);
-               // System.out.println(fNew);
+                // System.out.println(fNew);
 
                 if (aTrue.equals(tNew)){
                     scoreT = scoreT+1;
@@ -273,51 +270,14 @@ public class True_FalseForm {
                 }
                 else
                 {
-//---------------------------------------------------------------------------------------------------------------------------------------
-//Testing space
-                    final JFrame gradeDisplay = new JFrame();
-                    JPanel FinalP = new JPanel();
-                    FinalP.setLayout(new BorderLayout());
-                    JLabel Title = new JLabel("End Of Quiz!");
-                    FinalP.add(Title,BorderLayout.NORTH);
-                    Font TitleF = new Font("Courier", Font.BOLD,60);
-                    Title.setFont(TitleF);
-                    gradeDisplay.add(Title,BorderLayout.NORTH);
-                    JLabel gMessage = new JLabel();
-                    int numberOfQuestions = OTF_List.size();
-                    float finalGrade = ((float)scoreT/(float)numberOfQuestions)*100;
-                    gMessage.setText("You got " + scoreT + " out of " + OTF_List.size() + " questions correct!"+" Overall score: "+ finalGrade +"%");
-                    FinalP.add(gMessage,BorderLayout.CENTER);
-                    Font gMessageF = new Font("Courier",Font.PLAIN,20);
-                    gMessage.setFont(gMessageF);
-                    gradeDisplay.add(gMessage,BorderLayout.CENTER);
-                    JPanel Buttons = new JPanel();
-                    Buttons.setLayout( new FlowLayout());
-
-                    JButton Return = new JButton("Return to Main Menu");
-                    Return.setBackground(Color.LIGHT_GRAY);
-                    JButton tryAgain = new JButton("Try Test Again");
-                    tryAgain.setBackground(Color.RED);
-                    Buttons.add(Return);
-                    Buttons.add(tryAgain);
-                    gradeDisplay.add(Buttons,BorderLayout.SOUTH);
-                    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
-                    int height = screenSize.height;
-                    int width = screenSize.width;
-                    gradeDisplay.setPreferredSize(new Dimension(width / 2, height / 2));
-                    gradeDisplay.setVisible(true);
-                    FinalP.setVisible(true);
-                    gradeDisplay.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    gradeDisplay.pack();
-
-//-------------------------------------------------------------------------------------------------------------------------------------------
+                    // When test is over prints the result of test
+                    OTF_List.clear();
+                    printResult();
+                    frame.dispose();
                 }
 
             }
-
         });
-
-
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height = screenSize.height;
@@ -336,6 +296,7 @@ public class True_FalseForm {
 
     public static void getQuestionsTF(ArrayList<True_False> List) {
         try {
+            // Gets xml formated questions to display for user
             File T_F = new File("True_False.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -365,6 +326,7 @@ public class True_FalseForm {
     }
     public static void TF_file () {
         try {
+            // Writes user input test questions to an xml file
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.newDocument();
@@ -403,9 +365,68 @@ public class True_FalseForm {
 
             e.printStackTrace();
         }
-
-
     }
+    public static void printResult()
+    {
+        // Local Variables
+        int numberOfQuestions = OTF_List.size();
+        float finalGrade = ((float)scoreT/(float)numberOfQuestions)*100;
+        // Create Result Frame
+        final JFrame gradeDisplay = new JFrame();
+        // Create Panels in Frame
+        JPanel FinalP = new JPanel();// Panel to Hold Labels
+        FinalP.setLayout(new BorderLayout());
+        JPanel Buttons = new JPanel(); // Panel to Hold Buttons
+        Buttons.setLayout( new FlowLayout());
+        // Create Labels to Print Results
+        JLabel Title = new JLabel("End Of Quiz!");
+        JLabel gMessage = new JLabel();
+        gMessage.setText("You got " + scoreT + " out of " + OTF_List.size() + " questions correct!"+" Overall score: "+ finalGrade +"%");
+        // Create Fonts
+        Font TitleF = new Font("Courier", Font.BOLD,60);
+        Font gMessageF = new Font("Courier",Font.PLAIN,20);
+        Title.setFont(TitleF);
+        gMessage.setFont(gMessageF);
+        // Add Labels to Panel
+        FinalP.add(Title,BorderLayout.NORTH);
+        FinalP.add(gMessage,BorderLayout.CENTER);
+        // Create Buttons
+        JButton Return = new JButton("Return to Main Menu");
+        Return.setBackground(Color.LIGHT_GRAY);
+        JButton tryAgain = new JButton("Try Test Again");
+        tryAgain.setBackground(Color.RED);
+
+        // Button ActionListener
+        Return.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                // If returning to main reset variables and array
+                numb=0;
+                numb2=1;
+                end=false;
+                MainGUI.showMainMenu();
+                gradeDisplay.dispose();
+                OTF_List.clear();
+            }
+        });
+        // Add Buttons to Button Panel
+        Buttons.add(Return);
+        Buttons.add(tryAgain);
+
+        // Set Size of Frame
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
+        int height = screenSize.height;
+        int width = screenSize.width;
+
+        // Add Panels to Frame gradeDisplay
+        gradeDisplay.add(FinalP,BorderLayout.NORTH);
+        gradeDisplay.add(Buttons,BorderLayout.CENTER);
+        // Code to display
+        gradeDisplay.setPreferredSize(new Dimension(width / 2, height / 2));
+        gradeDisplay.setVisible(true);
+        gradeDisplay.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gradeDisplay.pack();
+    }
+
 
 
 }

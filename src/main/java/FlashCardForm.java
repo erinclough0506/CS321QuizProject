@@ -39,7 +39,6 @@ public class FlashCardForm {
     private static int numb2=1;
     private static boolean pressed=false;
     private static boolean end=false;
-    private static boolean restart=false;
     private static ArrayList<FlashCard> cardList=new ArrayList<FlashCard>();
     private static ArrayList<FlashCard> OFCList = new ArrayList<FlashCard>();
 
@@ -110,6 +109,7 @@ public class FlashCardForm {
                 counter = cardList.size();
                 System.out.println("Final Size of LIst "+cardList.size());
                 File(cardList); // Add list to XML File
+                cardList.clear(); // clears array
                 MainGUI.showMainMenu();
                 frame.dispose();
             }
@@ -175,7 +175,11 @@ public class FlashCardForm {
                             end = true;
                             CAnswer.setText("Restart");
                             System.out.println("Random");
-                        }  else {
+                        } else if (numb2>ArrayS)
+                        {
+                            CAnswer.setText("Show Answer");
+
+                        } else {
                             CAnswer.setText("Next Card");
                             QuestD.setText(OFCList.get(numb).getDefinition());
                             System.out.println("Show Pressed: Array " + ArrayS + " numb2 " + numb2);
@@ -212,6 +216,11 @@ public class FlashCardForm {
         {
             public void actionPerformed(ActionEvent event)
             {
+                numb = 0;
+                numb2 = 1;
+                pressed = false;
+                end=false;
+                OFCList.clear();
                 System.out.println("Exit to Main Pressed");
                 MainGUI.showMainMenu(); // Exit to main menu
                 flashCardF.dispose(); // Dispose of previous Frame

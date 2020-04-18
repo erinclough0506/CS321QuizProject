@@ -47,7 +47,8 @@ public class main {
         {
             public void actionPerformed(ActionEvent event)
             {
-                MainGUI.showMainMenu();
+                // Exits out of program
+                System.exit(1);
                 StarterMessage.dispose();
             }
         });
