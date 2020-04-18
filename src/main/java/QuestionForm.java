@@ -276,6 +276,7 @@ public class QuestionForm {
     public static void MCPlayer() {
 
         // Answers Panel
+
         Container AnswersPanel = Test.getContentPane();
         AnswersPanel.setLayout(new BoxLayout(AnswersPanel, BoxLayout.Y_AXIS));
         // Create Text Boxes
@@ -393,20 +394,22 @@ public class QuestionForm {
                     JLabel gMessage = new JLabel();
                     int numberOfQuestions = OMCList.size();
                     float finalGrade = ((float)score/(float)numberOfQuestions)*100;
-                    gMessage.setText("You got " + score + " out of " + OMCList.size() + " questions correct!"  +" Overall score: "+ finalGrade +"%");
+                    gMessage.setText("You got " + score + " out of " +numberOfQuestions + " questions correct!"  +" Overall score: "+ finalGrade +"%");
                     FinalP.add(gMessage,BorderLayout.CENTER);
                     Font gMessageF = new Font("Courier",Font.PLAIN,20); // Set Grade Output Font
                     gMessage.setFont(gMessageF);
                     gradeDisplay.add(gMessage,BorderLayout.CENTER);
                     JPanel Buttons = new JPanel();
                     Buttons.setLayout( new FlowLayout());
-
+                    numberOfQuestions=0;
+                    score=0;
+                    OMCList.clear();
                     JButton Return = new JButton("Return to Main Menu");
                     Return.setBackground(Color.LIGHT_GRAY);
-                    JButton tryAgain = new JButton("Try Test Again");
-                    tryAgain.setBackground(Color.RED);
+                    JButton quit = new JButton("Exit Program");
+                    quit.setBackground(Color.RED);
                     Buttons.add(Return);
-                    Buttons.add(tryAgain);
+                    Buttons.add(quit);
                     gradeDisplay.add(Buttons,BorderLayout.SOUTH);
 
 
@@ -419,14 +422,11 @@ public class QuestionForm {
                             gradeDisplay.dispose();
                         }
                     });
-                    tryAgain.addActionListener(new ActionListener() {
+                    quit.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent actionEvent) {
-                            System.out.println("Try Again Selected");
-                           //still not working returns to main menu instead
-                            MainGUI.showMainMenu();
+                            System.exit(1);
                             gradeDisplay.dispose();
-
                         }
                     });
                     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
