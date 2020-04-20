@@ -35,8 +35,11 @@ public class True_FalseForm {
     static String  bTrue = "0";
 
 
-
+    /**
+     * This function creates true/false questions and stores them in an XML file.
+     */
     public static void CreateTrueFalse() { // Make a TRUE_false form class
+
         // Create Frame
         final JFrame frame = new JFrame();
         //frame.setLayout(new BorderLayout());
@@ -139,6 +142,9 @@ public class True_FalseForm {
         frame.setVisible(true);
     }
 
+    /**
+     * this function clears the page to allow for more user input when creating questions.
+     */
     private static void clearPage() {
         question.setText("");
         question.requestFocus();
@@ -148,6 +154,11 @@ public class True_FalseForm {
 // Create True False test method and display
 //--------------------------------------------------------------------------------------------------------------
 
+
+    /**
+     * This functions retrieves the user's stored question data and
+     * passes control to the T/F test after it is recieved.
+     */
     public static void getTFQuestions()
     {
         // Class that sends selected Multiple choice form to an array
@@ -156,6 +167,11 @@ public class True_FalseForm {
         getQuestionsTF(OTF_List);
         createTest();
     }
+
+    /**
+     * This function is the Testing interface the user see when taking a true/false test. It determines whether answers
+     * are right or wrong, and calculates your grade at the end
+     */
     public static void createTest() {
 
         final JFrame frame = new JFrame();
@@ -294,6 +310,10 @@ public class True_FalseForm {
 
     }
 
+    /**
+     * This function give user data they have created in createTrueFalse() from an XML file to the test interface.
+     * @param List is an array is that is used to store the information into the file in the order it was input.
+     */
     public static void getQuestionsTF(ArrayList<True_False> List) {
         try {
             // Gets xml formated questions to display for user
@@ -324,6 +344,10 @@ public class True_FalseForm {
             System.out.println("Unable to save");
         }
     }
+
+    /**
+     * This function stores the user data into an XML file.
+     */
     public static void TF_file () {
         try {
             // Writes user input test questions to an xml file

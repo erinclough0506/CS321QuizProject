@@ -13,7 +13,11 @@ import javax.swing.*;
 
 
 public class main {
-
+    /**
+     * This is the first screen that is seen by the user when they start the program up. Is asks the user to either
+     * Start or Quit.
+     * @param args stores an array of arguments when a program is ran via command line.
+     */
     public static void main(String[] args) {
         System.out.println("Running Program");
         // Create Frame

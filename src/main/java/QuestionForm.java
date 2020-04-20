@@ -53,6 +53,10 @@ public class QuestionForm {
 
     static int score = 0;
 
+    /**
+     * This function sees if the user would like to create either true/false or multiple choice questions.
+     * If they would like to create T/F, they continue to createQuestion() in this class, if not, they are redirected to True_FalseForm
+     */
     public static void QFormMenu() {
         // Create Frame
         final JFrame selector = new JFrame();
@@ -98,6 +102,10 @@ public class QuestionForm {
         selector.setVisible(true);
     }
     //***************************Create MC Question*************************************************************************************
+
+    /**
+     * This function creates an array list of user entered data. This array list is stored and later used for testing.
+     */
     public static void createQuestion() {
         // Create Frame
         final JFrame frame = new JFrame();
@@ -264,6 +272,10 @@ public class QuestionForm {
     }
     //***************************************************************************************************************************************
     //************************Create Array to hold prebuilt Questions************************************************************************
+
+    /**
+     * This function gets the user data that was previously stored in an XML file and calls MCPlayer() to be tested on.
+     */
     public static void getOMCQuestions()
     {
         // Class that sends selected Multiple choice form to an array
@@ -273,6 +285,11 @@ public class QuestionForm {
         MCPlayer();
     }
     //*******************Displays Test for Multiple Choice*******************************************************************************
+
+    /**
+     * This function is the main testing interface for Multiple Choice. It determines whether answers
+     * are right or wrong, and calculates your grade at the end.
+     */
     public static void MCPlayer() {
 
         // Answers Panel
@@ -472,12 +489,9 @@ public class QuestionForm {
 
     }
 
-
-    private static void checkAnswer() {
-
-
-    }
-
+    /**
+     * This function clears the page so more user data can be input into the array.
+     */
     private static void clearMCPage() {
         questionMC.setText("Enter a Question");
         questionMC.requestFocus();
@@ -494,7 +508,10 @@ public class QuestionForm {
         cTrue = "F";
 
     }
-
+    /**
+     * This function give user data they have created in createQuestion() from an XML file to the test interface.
+     * @param List is an array is that is used to store the information into the file in the order it was input.
+     */
     public static void getQuestions(ArrayList<MultipleChoice> List) {
         // Create Frame
 
@@ -536,6 +553,9 @@ public class QuestionForm {
             System.out.println("Couldn't Save");
         }
     }
+    /**
+     * This function stores the user data into an XML file.
+     */
     public static void File() {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

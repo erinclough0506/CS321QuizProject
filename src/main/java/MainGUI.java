@@ -11,13 +11,12 @@ public class MainGUI {
     static File TF= new File("True_False.xml");
     static File MC= new File("Multiple_Choice.xml");
     static File FC=new File("Flashcard.xml");
+
+    /**
+     * This function is the main screen that redirects the use to where they need to go in the program.
+     */
     public static void showMainMenu()
     {
-        // Title page with Title and two options to either create a quiz or choose a quiz
-        // ***********************************************************************************
-        // 1. ADD text to Explain what to do when on menu screen
-        // 2. ADD buttons to other menus to be able to go back to Main Menu
-
         // Create Frame
         final JFrame Menu=new JFrame();
 
@@ -75,8 +74,16 @@ public class MainGUI {
         Menu.setVisible(true);
 
     }
+
+    /** After thr user selects to start the program, they are
+     * taken to this screen in which they chose how they would like to study.
+     * They then have the option to select either Flashcards, Multiple Choice, or T/F.
+     * This function will catch the user if they do not have an XML file
+     * stored locally to start quizzing and redirects them to the Question Design.
+     */
     public static void PickTypeofTest()
     {
+
         // Create Frame
         final JFrame Tests=new JFrame();
         // Create Menu Panel
@@ -168,9 +175,13 @@ public class MainGUI {
         Tests.pack();
         Tests.setVisible(true);  // Choose from 3 different choices
     }
-
+    /** This function asks the user for what type of question they would
+     * like to create, then redirects them to the functions in which their
+     * respective class is built. EX: When flashcard is hit, it redirects to FlashcardForm.createFlashcard()
+     */
     public static void showQDesign()
     {
+
         // Create a Frame
         final JFrame Tests=new JFrame();
         // Create Title Panel
@@ -232,6 +243,9 @@ public class MainGUI {
     }
     public static void showError()
     {
+        /**
+         * This functions catches the user if they do not have a set of questions stored to test on.
+         */
         // Create Frame
         final JFrame frame =new JFrame();
         frame.setLayout(new BorderLayout());
