@@ -136,6 +136,24 @@ public class FlashCardForm {
         mainPanel.add(ALabel);
         mainPanel.add(AScroll);
         mainPanel.add(Buttons);
+        // Create Help Menu Bar
+        JMenuBar Help= new JMenuBar();
+        JMenu helpMenu= new JMenu("Help");
+        JMenuItem helpMenuItem=new JMenuItem("Help");
+        helpMenu.add(helpMenuItem);
+        Help.add(helpMenu);
+
+        helpMenuItem.addActionListener(new ActionListener()
+        {
+            // If Help Was Pressed
+            public void actionPerformed(ActionEvent event)
+            {
+                System.out.println("HelpMenu Pressed");
+                JOptionPane.showMessageDialog(null, "Type a Question into question Text area. \n Type the Answer in to the answer text area.\n Select either Next to create a new Flashcard or Submit to save Flashcard deck");
+
+            }
+        });
+        frame.setJMenuBar(Help);
 
         Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height=screenSize.height;
@@ -253,7 +271,24 @@ public class FlashCardForm {
             }
         });
 
+        // Create Help Menu Bar
+        JMenuBar Help= new JMenuBar();
+        JMenu helpMenu= new JMenu("Help");
+        JMenuItem helpMenuItem=new JMenuItem("Help");
+        helpMenu.add(helpMenuItem);
+        Help.add(helpMenu);
 
+        helpMenuItem.addActionListener(new ActionListener()
+        {
+            // If Help Was Pressed
+            public void actionPerformed(ActionEvent event)
+            {
+                System.out.println("HelpMenu Pressed");
+                JOptionPane.showMessageDialog(null, "Read Question and mentally answer \n Press show answer to see if you guessed the correct answer\n Once deck is finished select restart to restart flashcard sequence");
+
+            }
+        });
+        flashCardF.setJMenuBar(Help);
 
 
         Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size

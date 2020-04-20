@@ -60,6 +60,24 @@ public class MainGUI {
             }
         });
 
+        // Create Help Menu Bar
+        JMenuBar Help= new JMenuBar();
+        JMenu helpMenu= new JMenu("Help");
+        JMenuItem helpMenuItem=new JMenuItem("Help");
+        helpMenu.add(helpMenuItem);
+        Help.add(helpMenu);
+
+        helpMenuItem.addActionListener(new ActionListener()
+        {
+            // If Help Was Pressed
+            public void actionPerformed(ActionEvent event)
+            {
+                System.out.println("HelpMenu Pressed");
+                JOptionPane.showMessageDialog(null, "Select Create Questions to create your own Flashcards, Multiple Choice or a True False Question Test. \n If you have already created questions then select Study Options to test it");
+
+            }
+        });
+
         Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height=screenSize.height;
         int width=screenSize.width;
@@ -67,6 +85,7 @@ public class MainGUI {
         // Adds components to frame
         Menu.add(Title, BorderLayout.NORTH);
         Menu.add(Buttons,BorderLayout.CENTER);
+        Menu.setJMenuBar(Help);
         // Sets Size of screen
         Menu.setPreferredSize(new Dimension(width/2,height/2));
         Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,6 +122,7 @@ public class MainGUI {
         JButton FlashCards= new JButton("FlashCards");
         JButton MultiChoice= new JButton("Multiple Choice");
         JButton True_F= new JButton("True False");
+        JButton MenuB= new JButton("Return to Main");
 
         FlashCards.addActionListener(new ActionListener()
         {
@@ -157,12 +177,39 @@ public class MainGUI {
 
             }
         });
+        MenuB.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {// Checks to see if True_False xml file exists
+               showMainMenu();
+                Tests.dispose();
+            }
+        });
 
 
         Buttons.add(FlashCards); // Add Buttons to Panel Buttons
         Buttons.add(MultiChoice);
         Buttons.add(True_F);
+        Buttons.add(MenuB);
 
+        // Create Help Menu Bar
+        JMenuBar Help= new JMenuBar();
+        JMenu helpMenu= new JMenu("Help");
+        JMenuItem helpMenuItem=new JMenuItem("Help");
+        helpMenu.add(helpMenuItem);
+        Help.add(helpMenu);
+
+        helpMenuItem.addActionListener(new ActionListener()
+        {
+            // If Help Was Pressed
+            public void actionPerformed(ActionEvent event)
+            {
+                System.out.println("HelpMenu Pressed");
+                JOptionPane.showMessageDialog(null, "If you have already created questions to for a test or Flashcard then select which option you want to choose");
+
+            }
+        });
+        Tests.setJMenuBar(Help);
         Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height=screenSize.height;
         int width=screenSize.width;
@@ -170,6 +217,7 @@ public class MainGUI {
         // Add Components to Tests frame
         Tests.add(Title, BorderLayout.NORTH);
         Tests.add(Buttons,BorderLayout.CENTER);
+
         Tests.setPreferredSize(new Dimension(width/2,height/2));
         Tests.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Tests.pack();
@@ -199,6 +247,7 @@ public class MainGUI {
         // Create Buttons
         JButton FlashCards= new JButton("FlashCards");
         JButton TestQ= new JButton("Test Questions");
+        JButton MenuB= new JButton("Return to Main");
 
         // Create Action for Buttons
         FlashCards.addActionListener(new ActionListener()
@@ -220,10 +269,38 @@ public class MainGUI {
                 Tests.dispose();
             }
         });
+        MenuB.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {
+                System.out.println("Test Questions Pressed");
+                showMainMenu();
+                Tests.dispose();
+            }
+        });
 
 
         Buttons.add(FlashCards); // Set Button Layout
         Buttons.add(TestQ);
+        Buttons.add(MenuB);
+        // Create Help Menu Bar
+        JMenuBar Help= new JMenuBar();
+        JMenu helpMenu= new JMenu("Help");
+        JMenuItem helpMenuItem=new JMenuItem("Help");
+        helpMenu.add(helpMenuItem);
+        Help.add(helpMenu);
+
+        helpMenuItem.addActionListener(new ActionListener()
+        {
+            // If Help Was Pressed
+            public void actionPerformed(ActionEvent event)
+            {
+                System.out.println("HelpMenu Pressed");
+                JOptionPane.showMessageDialog(null, "Test Option allows you to create a Multiple Choice Test or a TrueFalse Test if neither then choose the flashcard option");
+
+            }
+        });
+        Tests.setJMenuBar(Help);
 
 
 

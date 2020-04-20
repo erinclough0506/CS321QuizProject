@@ -70,9 +70,11 @@ public class QuestionForm {
         JPanel buttons = new JPanel();
         JButton Multi = new JButton("Multiple Choice");
         JButton TF = new JButton("True/False");
+        JButton Return = new JButton("Return to Create Questions");
         buttons.setLayout(new FlowLayout());
         buttons.add(Multi);
         buttons.add(TF);
+        buttons.add(Return);
         // Action Listener for buttons
         Multi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
@@ -86,6 +88,14 @@ public class QuestionForm {
             public void actionPerformed(ActionEvent event) {
                 System.out.println("TrueFalse Selected");
                 True_FalseForm.CreateTrueFalse();
+                selector.dispose();
+
+            }
+        });
+        Return.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                System.out.println("Return Selected");
+                MainGUI.showQDesign();
                 selector.dispose();
 
             }
@@ -259,6 +269,24 @@ public class QuestionForm {
         Buttons.setLayout(new FlowLayout());
         Buttons.add(Submit);
         Buttons.add(newQuestion);
+        // Create Help Menu Bar
+        JMenuBar Help= new JMenuBar();
+        JMenu helpMenu= new JMenu("Help");
+        JMenuItem helpMenuItem=new JMenuItem("Help");
+        helpMenu.add(helpMenuItem);
+        Help.add(helpMenu);
+
+        helpMenuItem.addActionListener(new ActionListener()
+        {
+            // If Help Was Pressed
+            public void actionPerformed(ActionEvent event)
+            {
+                System.out.println("HelpMenu Pressed");
+                JOptionPane.showMessageDialog(null, "Type a question into the question text area.\n Then type 4 answers into one in each answer text area make sure one of them is the correct answer. .\n Select which one is the correct answer then select either Next or Submit test ");
+
+            }
+        });
+        frame.setJMenuBar(Help);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height = screenSize.height;
@@ -489,6 +517,24 @@ public class QuestionForm {
         AnswersPanel.add(cButton);
 
         AnswersPanel.add(Buttons2);
+        // Create Help Menu Bar
+        JMenuBar Help= new JMenuBar();
+        JMenu helpMenu= new JMenu("Help");
+        JMenuItem helpMenuItem=new JMenuItem("Help");
+        helpMenu.add(helpMenuItem);
+        Help.add(helpMenu);
+
+        helpMenuItem.addActionListener(new ActionListener()
+        {
+            // If Help Was Pressed
+            public void actionPerformed(ActionEvent event)
+            {
+                System.out.println("HelpMenu Pressed");
+                JOptionPane.showMessageDialog(null, "Read the question.\n Then select which option is the correct answer.\n Continue answering each question by selecting next and when test is over select Submit test to see your result");
+
+            }
+        });
+        Test.setJMenuBar(Help);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height = screenSize.height;
         int width = screenSize.width;

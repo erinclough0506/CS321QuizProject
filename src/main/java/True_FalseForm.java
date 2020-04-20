@@ -128,7 +128,24 @@ public class True_FalseForm {
             }
         });
 
+        // Create Help Menu Bar
+        JMenuBar Help= new JMenuBar();
+        JMenu helpMenu= new JMenu("Help");
+        JMenuItem helpMenuItem=new JMenuItem("Help");
+        helpMenu.add(helpMenuItem);
+        Help.add(helpMenu);
 
+        helpMenuItem.addActionListener(new ActionListener()
+        {
+            // If Help Was Pressed
+            public void actionPerformed(ActionEvent event)
+            {
+                System.out.println("HelpMenu Pressed");
+                JOptionPane.showMessageDialog(null, "Type a statement or question into the text area.\n If the statement written is true then select true if not select false.\n Press next to create more questions and when you are finished select Submit ");
+
+            }
+        });
+        frame.setJMenuBar(Help);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height = screenSize.height;
         int width = screenSize.width;
@@ -306,6 +323,24 @@ public class True_FalseForm {
 
             }
         });
+        // Create Help Menu Bar
+        JMenuBar Help= new JMenuBar();
+        JMenu helpMenu= new JMenu("Help");
+        JMenuItem helpMenuItem=new JMenuItem("Help");
+        helpMenu.add(helpMenuItem);
+        Help.add(helpMenu);
+
+        helpMenuItem.addActionListener(new ActionListener()
+        {
+            // If Help Was Pressed
+            public void actionPerformed(ActionEvent event)
+            {
+                System.out.println("HelpMenu Pressed");
+                JOptionPane.showMessageDialog(null, "Read the statement at the top if it is true select the true button if it is false select the false button.\n Click to the next question until test is finished then select Submit Test to receive your results");
+
+            }
+        });
+        frame.setJMenuBar(Help);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
         int height = screenSize.height;
@@ -432,6 +467,7 @@ public class True_FalseForm {
         FinalP.add(gMessage,BorderLayout.CENTER);
         // Create Buttons
         JButton Return = new JButton("Return to Main Menu");
+        JButton quit=new JButton("Exit Program");
         Return.setBackground(Color.LIGHT_GRAY);
 
 
@@ -447,8 +483,16 @@ public class True_FalseForm {
                 OTF_List.clear();
             }
         });
+        quit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.exit(1);
+                gradeDisplay.dispose();
+            }
+        });
         // Add Buttons to Button Panel
         Buttons.add(Return);
+        Buttons.add(quit);
 
         // Set Size of Frame
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
