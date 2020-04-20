@@ -200,7 +200,9 @@ public class True_FalseForm {
 
         //Sets next
         final JButton next = new JButton("Next");
+        final JButton Menu= new JButton("Return to Main");
         Buttons.add(next);
+        Buttons.add(Menu);
 
         // Action Listener for buttons
         TRUE.addActionListener(new ActionListener() {
@@ -287,10 +289,20 @@ public class True_FalseForm {
                 else
                 {
                     // When test is over prints the result of test
-                    OTF_List.clear();
                     printResult();
                     frame.dispose();
                 }
+
+            }
+        });
+        Menu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.out.println("Menu  pressed");
+                MainGUI.showMainMenu();
+                frame.dispose();
+                OTF_List.clear();
+
 
             }
         });
@@ -417,8 +429,7 @@ public class True_FalseForm {
         // Create Buttons
         JButton Return = new JButton("Return to Main Menu");
         Return.setBackground(Color.LIGHT_GRAY);
-        JButton tryAgain = new JButton("Try Test Again");
-        tryAgain.setBackground(Color.RED);
+
 
         // Button ActionListener
         Return.addActionListener(new ActionListener() {
@@ -434,7 +445,6 @@ public class True_FalseForm {
         });
         // Add Buttons to Button Panel
         Buttons.add(Return);
-        Buttons.add(tryAgain);
 
         // Set Size of Frame
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // Get Screen Size
