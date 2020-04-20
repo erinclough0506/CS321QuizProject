@@ -390,6 +390,10 @@ public class True_FalseForm {
             e.printStackTrace();
         }
     }
+
+    /**
+     * This function prints the result of the True False test and gives the user their grade.
+     */
     public static void printResult()
     {
         // Local Variables
