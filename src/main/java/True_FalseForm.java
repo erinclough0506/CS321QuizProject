@@ -311,7 +311,7 @@ public class True_FalseForm {
     }
 
     /**
-     * This function give user data they have created in createTrueFalse() from an XML file to the test interface.
+     * This function give user data they have created in createTrueFalse() from an XML file to the testing interface.
      * @param List is an array is that is used to store the information into the file in the order it was input.
      */
     public static void getQuestionsTF(ArrayList<True_False> List) {
