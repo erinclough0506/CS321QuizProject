@@ -43,7 +43,7 @@ public class FlashCard {
     }
 
     /**
-     * returns the definition that specific flashcard holds
+     * returns the definition that specific flashcard has
      * @return definition, which is the string value the definition is held in.
      */
     public String getDefinition() {
