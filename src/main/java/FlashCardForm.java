@@ -20,14 +20,20 @@ import javax.xml.transform.stream.StreamResult;
 
 
 public class FlashCardForm {
+
+    /**
+     * Creates the FlashCard GUI and sets the buttons action listeners.
+     */
+
+
     // Similar to QuestionForm, this class acts as a
     // template for creating flashcards. It
     // is responsible for getting user input
     // and sending the user created flashcards to be stored.
     private static JTextArea question;
     private static JTextArea answer;
-    private static JTextArea QuestD=new JTextArea(10,20);;
-    private static JTextArea AnswerD=new JTextArea(10,20);;
+    private static JTextArea QuestD=new JTextArea(10,20);
+    private static JTextArea AnswerD=new JTextArea(10,20);
     static JFrame flashCardF=new JFrame("Study FlashCard");
     static JPanel mainFC=new JPanel();
     static JButton CAnswer=new JButton("Show Answer");
@@ -45,6 +51,9 @@ public class FlashCardForm {
 
     public static void CreateFlashcard()
     {
+        /**
+         * The GUI for creating the the flashcards and setting the text boxes and attributes
+         */
         final JFrame frame =new JFrame("Flash Card");
         JPanel mainPanel=new JPanel();
         Font TextF=new Font("Courier",Font.BOLD,20);
@@ -89,6 +98,9 @@ public class FlashCardForm {
         {
             public void actionPerformed(ActionEvent event)
             {
+                /**
+                 * Action listener for pressing the next card button.
+                 */
                 System.out.println("Next Card Pressed");
                 FlashCard card = new FlashCard(counter,question.getText(), answer.getText());
                 cardList.add(card);
@@ -103,6 +115,9 @@ public class FlashCardForm {
         {
             public void actionPerformed(ActionEvent event)
             {
+                /**
+                 *  Action listener for submitting the FlashCards that have been built.
+                 */
                 System.out.println("Submit Pressed");
                 FlashCard card = new FlashCard(counter, question.getText(), answer.getText());
                 cardList.add(card);
@@ -136,12 +151,22 @@ public class FlashCardForm {
     }
     public static void getOFCQuestions()
     {
-        // Class that sends selected Multiple choice form to an array
+
+        /**
+         * function that sends selected Multiple choice form to an array
+          */
+
         getFlashCards(OFCList);
         FCPlayer();
     }
+
+
     private static void FCPlayer()
     {
+        /**
+         * Main GUI test driver that sets the question, and checks the write and wrong answers based on the action
+         * listeners
+         */
         // Create Frame
 
         Font TextF=new Font("Courier",Font.BOLD,20);
@@ -248,6 +273,7 @@ public class FlashCardForm {
     }
     private static void clearCard()
     {
+
         question.setText("");
         answer.setText("");
         question.requestFocus();
@@ -290,6 +316,11 @@ public class FlashCardForm {
 
     public static void File(ArrayList<FlashCard> flashcardList)
     {
+        /**
+         * Creates the XML file and appends the contents while also keeping up with
+         * how many objects are needed by passing the function the flashcard list
+         * array
+         */
         Element rootElement;
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
@@ -339,6 +370,9 @@ public class FlashCardForm {
     //creates new flashcard in xml
     private static Node createFlashCardElement(Document doc, String num, String term, String definition)
     {
+        /**
+         * Creates the single card from the array and is appended when createFlashCardElement is called
+         */
         Element SetName = doc.createElement("flashcard");
 
         //set num attribute

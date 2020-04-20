@@ -140,6 +140,9 @@ public class QuestionForm {
         // Create Radio Button Action Listener
         aButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
+                /**
+                 * Action listener for button A.
+                 */
                 if (aButton.isSelected()) {
                     System.out.println("ButtonA Selected");
                     aTrue = "1";
@@ -156,6 +159,10 @@ public class QuestionForm {
             }
         });
         bButton.addActionListener(new ActionListener() {
+            /**
+             * Action listener for buttton B.
+             * @param event the action of pressing the button
+             */
             public void actionPerformed(ActionEvent event) {
                 if (bButton.isSelected()) {
                     System.out.println("ButtonB Selected");
@@ -175,6 +182,9 @@ public class QuestionForm {
         });
         cButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
+                /**
+                 * Action Listener for button C.
+                 */
                 if (cButton.isSelected()) {
                     System.out.println("ButtonC Selected");
                     cTrue = "1";
