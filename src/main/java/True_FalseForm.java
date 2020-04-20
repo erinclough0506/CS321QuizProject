@@ -490,6 +490,7 @@ public class True_FalseForm {
                 gradeDisplay.dispose();
             }
         });
+
         // Add Buttons to Button Panel
         Buttons.add(Return);
         Buttons.add(quit);
