@@ -28,7 +28,7 @@ public class FlashCard {
 
     /**
      * returns what number flashcard it is in the list
-     * @return returns the int value of num which contains what position the flashcard is in inside the ArrayList
+     * @return returns the int value of num which contains what position the flashcard is in inside the ArrayList.
      */
     public int getNum() {
         return num;
