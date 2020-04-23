@@ -124,7 +124,7 @@ public class QuestionForm {
         Answer2Panel.setLayout(new BoxLayout(Answer2Panel, BoxLayout.Y_AXIS));
 
         // Create Title
-        JLabel label = new JLabel("Enter your Question and Select the A,B,C, or D button that corresponds with the correct answer.");
+        JLabel label = new JLabel("Enter your Question and Select the A,B,or C button that corresponds with the correct answer.");
         Font TitleF = new Font("Courier", Font.BOLD, 20);
         label.setFont(TitleF);
 
@@ -282,7 +282,7 @@ public class QuestionForm {
             public void actionPerformed(ActionEvent event)
             {
                 System.out.println("HelpMenu Pressed");
-                JOptionPane.showMessageDialog(null, "Type a question into the question text area.\n Then type 4 answers into one in each answer text area make sure one of them is the correct answer. .\n Select which one is the correct answer then select either Next or Submit test ");
+                JOptionPane.showMessageDialog(null, "Type a question into the question text area.\n Then type 3 answers into one in each answer text area make sure one of them is the correct answer. .\n Select which one is the correct answer then select either Next or Submit test ");
 
             }
         });
