@@ -238,7 +238,7 @@ public class True_FalseForm {
                     System.out.println("True is not selected");
                     aTrue = "0";
                 }
-
+//a comment
             }
         });
         //-----------------------------------------------------------
@@ -269,13 +269,13 @@ public class True_FalseForm {
                 System.out.println("next  pressed");
 
                 String tNew = null;
-                String fNew = null;
+
 
                 System.out.print("This is True- " + aTrue);
                 System.out.print("This is False-" + bTrue);
                 System.out.println("inside list- "+ OTF_List.get(numb).getFlag());
                 tNew = OTF_List.get(numb).getFlag();
-                fNew = OTF_List.get(numb).getFlag();
+
 
                 System.out.println(tNew);
                 // System.out.println(fNew);
@@ -404,21 +404,21 @@ public class True_FalseForm {
             doc.setXmlStandalone(true);
             Element rootElement = doc.createElement("Questions");
             doc.appendChild(rootElement);
-            for (int i = 0; i < TF_List.size(); i++) {
+            for (True_False true_false : TF_List) {
 
                 //Set Question number in the id
                 Element NumberElement = doc.createElement("QuestionNum");
-                NumberElement.setAttribute("Number", "" + TF_List.get(i).getNum());
+                NumberElement.setAttribute("Number", "" + true_false.getNum());
                 rootElement.appendChild(NumberElement);
                 //---------------------------------------------------------------
                 //Set the Question
                 Element QuestionElement = doc.createElement("Question");
-                QuestionElement.setTextContent(TF_List.get(i).getQuestion());
+                QuestionElement.setTextContent(true_false.getQuestion());
                 NumberElement.appendChild(QuestionElement);
                 //----------------------------------------------------------------
                 //Set Flag1
                 Element Flag_Element1 = doc.createElement("Flag_1");
-                Flag_Element1.setTextContent(TF_List.get(i).getFlag());
+                Flag_Element1.setTextContent(true_false.getFlag());
                 NumberElement.appendChild(Flag_Element1);
 
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();

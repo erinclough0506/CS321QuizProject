@@ -49,11 +49,12 @@ public class FlashCardForm {
     private static ArrayList<FlashCard> OFCList = new ArrayList<FlashCard>();
 
 
+    /**
+     * The GUI for creating the the flashcards and setting the text boxes and attributes
+     */
     public static void CreateFlashcard()
     {
-        /**
-         * The GUI for creating the the flashcards and setting the text boxes and attributes
-         */
+
         final JFrame frame =new JFrame("Flash Card");
         JPanel mainPanel=new JPanel();
         Font TextF=new Font("Courier",Font.BOLD,20);
@@ -96,11 +97,12 @@ public class FlashCardForm {
         // Add action to Buttons
         nextButton.addActionListener(new ActionListener()
         {
+            /**
+             * Action listener for pressing the next card button.
+             */
             public void actionPerformed(ActionEvent event)
             {
-                /**
-                 * Action listener for pressing the next card button.
-                 */
+
                 System.out.println("Next Card Pressed");
                 FlashCard card = new FlashCard(counter,question.getText(), answer.getText());
                 cardList.add(card);
@@ -113,11 +115,12 @@ public class FlashCardForm {
         });
         Submit.addActionListener(new ActionListener()
         {
+            /**
+             *  Action listener for submitting the FlashCards that have been built.
+             */
             public void actionPerformed(ActionEvent event)
             {
-                /**
-                 *  Action listener for submitting the FlashCards that have been built.
-                 */
+
                 System.out.println("Submit Pressed");
                 FlashCard card = new FlashCard(counter, question.getText(), answer.getText());
                 cardList.add(card);
@@ -167,24 +170,27 @@ public class FlashCardForm {
         frame.pack();
         frame.setVisible(true);
     }
+
+    /**
+     * function that sends selected Multiple choice form to an array
+     */
     public static void getOFCQuestions()
     {
 
-        /**
-         * function that sends selected Multiple choice form to an array
-          */
+
 
         getFlashCards(OFCList);
         FCPlayer();
     }
 
 
+    /**
+     * Main GUI test driver that sets the question, and checks the write and wrong answers based on the action
+     * listeners
+     */
     private static void FCPlayer()
     {
-        /**
-         * Main GUI test driver that sets the question, and checks the write and wrong answers based on the action
-         * listeners
-         */
+
         // Create Frame
 
         Font TextF=new Font("Courier",Font.BOLD,20);
@@ -349,13 +355,14 @@ public class FlashCardForm {
         }
     }
 
+    /**
+     * Creates the XML file and appends the contents while also keeping up with
+     * how many objects are needed by passing the function the flashcard list
+     * array
+     */
     public static void File(ArrayList<FlashCard> flashcardList)
     {
-        /**
-         * Creates the XML file and appends the contents while also keeping up with
-         * how many objects are needed by passing the function the flashcard list
-         * array
-         */
+
         Element rootElement;
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
@@ -403,11 +410,13 @@ public class FlashCardForm {
     }
 
     //creates new flashcard in xml
+
+    /**
+     * Creates the single card from the array and is appended when createFlashCardElement is called
+     */
     private static Node createFlashCardElement(Document doc, String num, String term, String definition)
     {
-        /**
-         * Creates the single card from the array and is appended when createFlashCardElement is called
-         */
+
         Element SetName = doc.createElement("flashcard");
 
         //set num attribute

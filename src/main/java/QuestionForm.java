@@ -170,7 +170,7 @@ public class QuestionForm {
         });
         bButton.addActionListener(new ActionListener() {
             /**
-             * Action listener for buttton B.
+             * Action listener for button B.
              * @param event the action of pressing the button
              */
             public void actionPerformed(ActionEvent event) {
@@ -191,10 +191,12 @@ public class QuestionForm {
             }
         });
         cButton.addActionListener(new ActionListener() {
+
+            /**
+             * Action Listener for button C.
+             */
             public void actionPerformed(ActionEvent event) {
-                /**
-                 * Action Listener for button C.
-                 */
+
                 if (cButton.isSelected()) {
                     System.out.println("ButtonC Selected");
                     cTrue = "1";
@@ -435,6 +437,7 @@ public class QuestionForm {
                         end = true;
                     }
                 }
+
                 else
                 {
                     // If test has ended Show score

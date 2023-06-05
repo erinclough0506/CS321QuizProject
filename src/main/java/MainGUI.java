@@ -318,11 +318,12 @@ public class MainGUI {
         Tests.pack();
         Tests.setVisible(true);
     }
+    /**
+     * This functions catches the user if they do not have a set of questions stored to test on.
+     */
     public static void showError()
     {
-        /**
-         * This functions catches the user if they do not have a set of questions stored to test on.
-         */
+
         // Create Frame
         final JFrame frame =new JFrame();
         frame.setLayout(new BorderLayout());

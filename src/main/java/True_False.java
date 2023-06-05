@@ -1,7 +1,9 @@
+/**
+ * class that initializes the objects question, flag and number
+ */
+
 public class True_False{
-    /**
-     * class that initializes the objects question, flag and number
-     */
+
 
 
 
@@ -9,11 +11,12 @@ public class True_False{
     private String Question = null;
     private String Flag = null;
 
+    /**
+     * Constructor for True False
+     */
     public True_False (int num,String Q, String Flag)
     {
-        /**
-         * Constructor for True False
-         */
+
         this.num = num;
         this.Question = Q;
         this.Flag = Flag ;
